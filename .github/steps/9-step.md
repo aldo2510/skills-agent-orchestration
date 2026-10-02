@@ -3,29 +3,15 @@
 ## Objetivo
 Comprobar que el flujo produjo trazabilidad, evidencia e iteración real.
 
-## 1. Prompt exacto
+## Prompt exacto
 ~~~text
 Audita toda la orquestación.
-
 No modifiques archivos.
-
-Revisa:
-- responsabilidades;
-- handoffs;
-- iteraciones;
-- evidencia;
-- validación;
-- decisiones humanas.
-
-Identifica:
-1. un handoff bien definido;
-2. un handoff mejorable;
-3. un solapamiento;
-4. una evidencia insuficiente;
-5. una mejora concreta para una versión 2.
+Revisa responsabilidades, handoffs, iteraciones, evidencia, validación y decisiones humanas.
+Identifica un handoff bien definido, uno mejorable, un solapamiento, una evidencia insuficiente y una mejora concreta para V2.
 ~~~
 
-## 2. Crea docs/orchestration-review.md
+## 1. Crea docs/orchestration-review.md
 ~~~markdown
 # Orchestration Review
 
@@ -33,7 +19,7 @@ Identifica:
 Planner → Designer tiene una entrada y una salida explícitas.
 
 ## Handoff mejorable
-Validator → Orchestrator debe transportar evidencia por criterio y no solo un resumen.
+Validator → Orchestrator debe transportar evidencia por criterio.
 
 ## Solapamientos
 Orchestrator coordina; no debe implementar ni sustituir al Validator.
@@ -58,17 +44,16 @@ Usar un formato común de handoff:
 Objetivo → Planner → Designer → Coder → Validator → corrección → Validator → Orchestrator → humano.
 ~~~
 
-## 3. Verificación
+## 2. Verificación
 ~~~bash
 test -f docs/orchestration-review.md
 grep -Eiq 'handoff|humano|Orchestrator' docs/orchestration-review.md
+grep -Eiq 'mejora|V2' docs/orchestration-review.md
 ~~~
 
-## 4. Commit
+## 3. Commit
 ~~~bash
 git add docs/orchestration-review.md
 git commit -m "docs: complete orchestration audit"
 git push
-~~~
-
-**Tiempo sugerido: 8–10 min.**
+~~
