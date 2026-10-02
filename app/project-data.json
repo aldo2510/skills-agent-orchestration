@@ -1,0 +1,7 @@
+{
+  "projects": [
+    {"name":"Payments API","status":"On track","progress":82,"owner":"Ana","updated":"2026-10-02"},
+    {"name":"Mobile App","status":"At risk","progress":58,"owner":"Luis","updated":"2026-10-01"},
+    {"name":"Data Platform","status":"On track","progress":71,"owner":"Marta","updated":"2026-09-30"}
+  ]
+}
