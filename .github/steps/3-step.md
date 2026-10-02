@@ -1,231 +1,241 @@
 ## Step 3: Orquesta diseño, desarrollo y validación
 
-Esta es la parte principal del laboratorio.
+### Objetivo
+Ejecutar un flujo real de agentes con handoffs y una segunda ronda de validación.
 
-> **Idea clave:** la orquestación se vuelve útil cuando existe un flujo con dependencias, handoffs, validación y feedback. No se trata de lanzar cinco agentes y esperar que todo funcione.
+### Fase A — Designer
 
-### Fase A — Diseño
+Copia y pega al Orchestrator:
 
-Pide al Orchestrator:
+```text
+Usa docs/project-plan.md como contexto.
 
-> Usa docs/project-plan.md como contexto. Delega al Designer la definición de la experiencia del dashboard. El Designer debe entregar un handoff accionable para el Coder y no debe implementar código.
+Delega al Designer el diseño de Project Pulse.
+El Designer no debe implementar código.
 
-El Designer debe definir:
+Debe entregar:
 - layout;
+- componentes;
 - jerarquía visual;
-- tarjetas;
 - estados;
 - progreso;
 - responsive behavior;
-- accesibilidad básica;
-- relación entre HTML, CSS y datos.
+- accesibilidad;
+- reglas claras para Coder.
 
-Crea docs/design-handoff.md.
+Guarda el resultado como docs/design-handoff.md.
+```
+
+Crea `docs/design-handoff.md`:
+
+```markdown
+# Design Handoff
+
+## Contexto recibido
+- ...
+
+## Layout
+...
+
+## Componentes
+...
+
+## Estados
+...
+
+## Progreso
+...
+
+## Responsive
+- Desktop:
+- Tablet:
+- Mobile:
+
+## Accesibilidad
+...
+
+## Reglas para Coder
+- ...
+
+## Trade-offs
+...
+
+## Preguntas abiertas
+...
+```
+
+### Fase B — Coder
+
+Copia y pega:
+
+```text
+Usa docs/project-plan.md y docs/design-handoff.md.
+
+Delega al Coder la implementación.
+
+Debe modificar:
+- app/index.html
+- app/styles.css
+- app/project-data.json
+
+Debe conservar la separación entre estructura, estilos y datos.
+Al terminar debe mostrar los cambios y la evidencia de validación.
+
+Guarda docs/coding-handoff.md.
+```
+
+Estructura:
+
+```markdown
+# Coding Handoff
+
+## Contexto recibido
+...
+
+## Cambios
+| Archivo | Cambio | Motivo |
+|---|---|---|
+| ... | ... | ... |
+
+## Decisiones
+...
+
+## Evidencia
+...
+
+## Incertidumbres
+...
+```
+
+### Fase C — Validator
+
+Copia y pega:
+
+```text
+Usa el requerimiento original, docs/project-plan.md y docs/design-handoff.md.
+
+Delega al Validator una revisión completa.
+
+No corrijas código.
+
+Debe validar:
+- HTML;
+- CSS;
+- JSON;
+- datos;
+- estados;
+- progreso;
+- responsive;
+- accesibilidad;
+- ausencia de backend;
+- coherencia con el diseño.
+
+Debe registrar evidencia, severidad y recomendación en docs/validation-report.md.
+```
 
 Usa:
 
-    # Design Handoff
+```markdown
+# Validation Report
 
-    ## Contexto recibido
-    - Requerimiento:
-    - Criterios de aceptación relevantes:
+## Resumen
+- Estado:
+- Alcance:
 
-    ## Propuesta visual
-    ### Layout
-    ...
-    ### Componentes
-    ...
-    ### Estados
-    ...
-    ### Progreso
-    ...
+## Checks
+| Check | Resultado | Evidencia |
+|---|---|---|
+| CSS | PASS/FAIL | ... |
+| JSON | PASS/FAIL | ... |
+| Datos | PASS/FAIL | ... |
+| Estados | PASS/FAIL | ... |
+| Progreso | PASS/FAIL | ... |
+| Responsive | PASS/FAIL | ... |
+| Accesibilidad | PASS/FAIL | ... |
+| Sin backend | PASS/FAIL | ... |
 
-    ## Responsive behavior
-    - Desktop:
-    - Tablet:
-    - Mobile:
+## Hallazgos
+| Hallazgo | Severidad | Evidencia | Recomendación |
+|---|---|---|---|
+| ... | ... | ... | ... |
+```
 
-    ## Accesibilidad
-    - ...
+### Fase D — Corrección
 
-    ## Reglas para el Coder
-    - ...
-    - ...
+Copia y pega:
 
-    ## Decisiones y trade-offs
-    - ...
+```text
+Procesa docs/validation-report.md.
 
-    ## Preguntas abiertas
-    - ...
+Para cada hallazgo:
+1. indica el agente responsable;
+2. crea un handoff específico;
+3. explica qué debe cambiar;
+4. define cómo se comprobará la corrección.
 
-Antes de continuar, pregúntate: ¿un Coder podría implementar el dashboard leyendo solamente este handoff y el plan?
+No implementes directamente cambios que correspondan a Coder o Designer.
+```
 
-### Fase B — Implementación
+Actualiza `docs/coding-handoff.md` con:
 
-Pide al Orchestrator:
-
-> Delega al Coder la implementación usando docs/project-plan.md y docs/design-handoff.md como contexto. Mantén separados HTML, CSS y JSON. Al terminar, entrega evidencia de lo realizado.
-
-El Coder debe implementar:
-- app/index.html;
-- app/styles.css;
-- app/project-data.json.
-
-Crea o actualiza docs/coding-handoff.md:
-
-    # Coding Handoff
-
-    ## Contexto recibido
-    - Plan:
-    - Design handoff:
-
-    ## Cambios realizados
-    | Archivo | Cambio | Motivo |
-    |---|---|---|
-    | ... | ... | ... |
-
-    ## Decisiones tomadas
-    - ...
-
-    ## Evidencia
-    - Cómo comprobé que funciona:
-    - Qué revisé manualmente:
-
-    ## Incertidumbres
-    - ...
-
-### Fase C — Validación
-
-Delega al Validator:
-
-> Revisa la implementación completa usando el requerimiento original, el plan y los handoffs. No corrijas el código. Reporta hallazgos, evidencia, severidad y recomendación.
-
-Debe comprobar:
-- HTML → CSS → JSON;
-- estructura HTML;
-- datos válidos;
-- estados visibles;
-- progreso;
-- responsive behavior;
-- ausencia de backend;
-- accesibilidad básica;
-- coherencia con el diseño.
-
-Crea docs/validation-report.md:
-
-    # Validation Report
-
-    ## Resumen
-    - Estado:
-    - Fecha:
-    - Alcance:
-
-    ## Checks
-    | Check | Resultado | Evidencia |
-    |---|---|---|
-    | Referencia CSS | PASS/FAIL | ... |
-    | Referencia JSON | PASS/FAIL | ... |
-    | Datos | PASS/FAIL | ... |
-    | Estados | PASS/FAIL | ... |
-    | Progreso | PASS/FAIL | ... |
-    | Responsive | PASS/FAIL | ... |
-    | Accesibilidad | PASS/FAIL | ... |
-    | Sin backend | PASS/FAIL | ... |
-
-    ## Hallazgos
-    | Hallazgo | Severidad | Evidencia | Recomendación |
-    |---|---|---|---|
-    | ... | ... | ... | ... |
-
-    ## Revalidación
-    - Qué debería comprobarse después de una corrección:
-
-### Fase D — Iteración
-
-No aceptes automáticamente el primer resultado.
-
-Pide al Orchestrator:
-
-> Procesa el reporte de Validator. Clasifica los hallazgos, decide qué agente debe intervenir y genera un handoff específico para corregir cada problema. No corrijas directamente si el trabajo corresponde a otro agente.
-
-Actualiza docs/coding-handoff.md:
-
-    ## Iteración de corrección
-    | Hallazgo | Agente | Cambio | Evidencia |
-    |---|---|---|---|
-    | ... | ... | ... | ... |
-
-Después vuelve a validar.
+```markdown
+## Iteración de corrección
+| Hallazgo | Agente | Cambio | Evidencia |
+|---|---|---|---|
+| ... | ... | ... | ... |
+```
 
 ### Fase E — Segunda validación
 
-Pide al Validator:
+Copia y pega:
 
-> Revisa nuevamente el dashboard después de las correcciones. Compara el resultado con el requerimiento original y con el primer validation-report. Indica qué hallazgos fueron resueltos y cuáles permanecen.
+```text
+Vuelve a ejecutar el Validator después de las correcciones.
 
-Añade al validation-report una sección:
+Compara con el primer validation-report.
 
-    ## Segunda ronda
-    - Hallazgos resueltos:
-    - Hallazgos pendientes:
-    - Evidencia:
+Indica:
+- hallazgos resueltos;
+- hallazgos pendientes;
+- evidencia.
+
+No corrijas código.
+```
+
+Añade:
+
+```markdown
+## Segunda ronda
+- Hallazgos resueltos:
+- Hallazgos pendientes:
+- Evidencia:
+```
 
 ### Fase F — Handoff final
 
-Pide al Orchestrator que produzca docs/final-handoff.md.
+Copia y pega:
 
-Usa:
+```text
+Genera docs/final-handoff.md para un engineering lead que no participó en el ejercicio.
 
-    # Final Handoff
+Incluye:
+- objetivo;
+- resultado;
+- responsabilidades de cada agente;
+- decisiones;
+- validaciones;
+- iteraciones;
+- riesgos;
+- pendientes;
+- decisiones humanas.
 
-    ## Objetivo y resultado
-    ...
+No inventes evidencia.
+```
 
-    ## Flujo de agentes
-    ...
+### Fase G — Revisión
 
-    ## Responsabilidades
-    | Agente | Trabajo realizado | Evidencia |
-    |---|---|---|
-    | ... | ... | ... |
-
-    ## Decisiones relevantes
-    - ...
-
-    ## Validaciones ejecutadas
-    - ...
-
-    ## Iteraciones
-    - ...
-
-    ## Riesgos y pendientes
-    - ...
-
-    ## Decisiones bajo control humano
-    - ...
-
-### Fase G — Revisión humana
-
-Abre el HTML en el navegador y revisa:
-1. dashboard;
-2. datos;
-3. handoffs;
-4. validación inicial;
-5. segunda validación;
-6. requerimiento original.
-
-Corrige cualquier problema que los agentes no hayan detectado.
+Abre `app/index.html` en el navegador y comprueba visualmente el resultado.
 
 Haz commit y push.
 
-### Criterios de salida
-
-- [ ] Existe design-handoff.md.
-- [ ] Existe coding-handoff.md.
-- [ ] Existe validation-report.md.
-- [ ] Existe final-handoff.md.
-- [ ] La implementación funciona.
-- [ ] Existe evidencia de una segunda validación.
-- [ ] Revisaste manualmente el resultado.
-
-**Tiempo sugerido: 40-45 min.**
+**Tiempo: 35-38 min.**
