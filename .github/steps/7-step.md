@@ -1,38 +1,40 @@
 # Step 7 — Ejecuta una segunda validación
 
 ## Objetivo
-Una corrección sin nueva evidencia es una hipótesis. Validator debe comprobar nuevamente el resultado.
+Comprobar con nueva evidencia que la corrección del Step 6 realmente resolvió el hallazgo.
 
 ## Prompt exacto
 ~~~text
 Actúa como Validator.
-Revisa nuevamente el dashboard después de las correcciones.
 No modifiques archivos.
-Compara cada hallazgo de la primera validación con el estado actual.
-Para cada uno indica hallazgo original, evidencia actual, resultado, si quedó resuelto y si requiere otra iteración.
-Incluye JSON, HTML, CSS, responsive y accesibilidad.
+Revisa nuevamente el dashboard después de la corrección.
+Comprueba específicamente la referencia CSS y también JSON, HTML, responsive y accesibilidad.
+Compara el hallazgo de la primera validación con el estado actual.
+Para cada criterio indica evidencia, resultado y si requiere otra iteración.
 ~~~
 
-## 1. Agrega a docs/validation-report.md
+## 1. Actualiza docs/validation-report.md
+
+Copia esta sección al final:
+
 ~~~markdown
 ## Segunda ronda
 
 | Hallazgo original | Evidencia nueva | Resultado |
 |---|---|---|
-| Referencia de archivo | HTML y navegador revisados | Resuelto |
-| JSON inválido | python -m json.tool | Resuelto |
-| Problema visual | Revisión responsive | Resuelto |
+| Referencia CSS incorrecta | app/index.html vuelve a apuntar a styles.css y el dashboard carga el estilo | Resuelto |
 
 ## Segunda validación
-La segunda validación confirma si las correcciones resolvieron los hallazgos. Si alguno continúa abierto, debe regresar al Orchestrator.
+
+La corrección fue comprobada por Validator. Si aparece un nuevo problema, debe regresar al Orchestrator antes de continuar.
 ~~~
 
-Si un hallazgo no existió, sustitúyelo por el hallazgo real.
-
-## 2. Ejecuta
+## 2. Ejecuta las verificaciones
 ~~~bash
+grep -E 'styles.css' app/index.html
 python -m json.tool app/project-data.json
-grep -E 'styles.css|project-data.json' app/index.html
+test -f app/index.html
+test -f app/styles.css
 ~~~
 
 ## 3. Commit
