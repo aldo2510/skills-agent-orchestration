@@ -1,53 +1,74 @@
-## Step 9: Audita la orquestación
+# Step 9 — Audita nuevamente la orquestación
 
-### Teoría
-Un sistema multiagente puede producir un buen dashboard y aun así tener un proceso deficiente. La auditoría revisa contexto, responsabilidades, handoffs y evidencia.
+## Objetivo
+Comprobar que el flujo produjo trazabilidad, evidencia e iteración real.
 
-### Copia y pega
-```text
-Revisa:
-- docs/agent-map.md
-- docs/project-plan.md
-- docs/design-handoff.md
-- docs/coding-handoff.md
-- docs/validation-report.md
-- docs/final-handoff.md
+## 1. Prompt exacto
+~~~text
+Audita toda la orquestación.
 
-Actúa como engineering lead.
 No modifiques archivos.
-Identifica contexto perdido, responsabilidades solapadas, handoffs ambiguos, decisiones sin evidencia y validaciones insuficientes.
-```
 
-Crea `docs/orchestration-review.md`:
+Revisa:
+- responsabilidades;
+- handoffs;
+- iteraciones;
+- evidencia;
+- validación;
+- decisiones humanas.
 
-```markdown
+Identifica:
+1. un handoff bien definido;
+2. un handoff mejorable;
+3. un solapamiento;
+4. una evidencia insuficiente;
+5. una mejora concreta para una versión 2.
+~~~
+
+## 2. Crea docs/orchestration-review.md
+~~~markdown
 # Orchestration Review
-## Handoff que funcionó bien
-- Evidencia:
-- Motivo:
+
+## Handoff bien definido
+Planner → Designer tiene una entrada y una salida explícitas.
 
 ## Handoff mejorable
-- Evidencia:
-- Mejora:
+Validator → Orchestrator debe transportar evidencia por criterio y no solo un resumen.
 
-## Responsabilidades solapadas
-...
+## Solapamientos
+Orchestrator coordina; no debe implementar ni sustituir al Validator.
 
 ## Evidencia insuficiente
-...
+El responsive behavior requiere revisión visual en más de un tamaño.
 
 ## Decisión humana
-...
+La persona participante decide si la evidencia es suficiente para aceptar el resultado.
 
-## Mejora del Orchestrator
-...
+## Mejora para V2
+Usar un formato común de handoff:
+- contexto;
+- objetivo;
+- restricciones;
+- resultado;
+- evidencia;
+- riesgos;
+- siguiente acción.
 
 ## Flujo V2
-1. ...
-2. ...
-3. ...
-```
+Objetivo → Planner → Designer → Coder → Validator → corrección → Validator → Orchestrator → humano.
+~~~
 
-Haz commit y push.
+## 3. Verificación
+~~~bash
+test -f docs/orchestration-review.md
+grep -Eiq 'handoff|humano|Orchestrator' docs/orchestration-review.md
+~~~
 
-**Tiempo: 8-10 min.**
+## 4. Commit
+~~~bash
+git add docs/orchestration-review.md
+git commit -m "docs: complete orchestration audit"
+git push
+~~~
+
+**Tiempo sugerido: 8–10 min.**
