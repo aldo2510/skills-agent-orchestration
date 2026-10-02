@@ -1,99 +1,89 @@
-## Step 1: Conoce tu equipo de agentes
+## Step 1: Conoce el equipo de agentes
 
-> **Idea clave:** un equipo de agentes no es una colección de prompts. Cada agente debe tener una responsabilidad, límites, entradas y una salida clara para que otro agente pueda continuar el trabajo.
+### Objetivo
+Entender qué hace cada agente y cómo debe viajar el contexto.
 
-### 1. Abre el entorno
+### 1. Inspecciona los agentes
 
-Abre un Codespace y ejecuta Copilot CLI.
-
-Inspecciona:
+Abre:
 - .github/agents/orchestrator.agent.md
 - .github/agents/planner.agent.md
 - .github/agents/designer.agent.md
 - .github/agents/coder.agent.md
 - .github/agents/validator.agent.md
 
-No pidas todavía que implementen el dashboard.
+### 2. Copia y pega este prompt
 
-### 2. Entiende las responsabilidades
+```text
+Analiza los cinco agentes del directorio .github/agents.
 
-Identifica:
+No modifiques ningún archivo.
 
-| Agente | Responsabilidad |
-|---|---|
-| Orchestrator | Coordina el trabajo y conserva el contexto |
-| Planner | Convierte el requerimiento en un plan |
-| Designer | Define estructura y experiencia visual |
-| Coder | Implementa |
-| Validator | Busca problemas y entrega evidencia |
+Para cada agente indica:
+- responsabilidad;
+- entrada que necesita;
+- salida que debe producir;
+- qué tareas NO debería realizar;
+- qué agente debería consumir su salida.
 
-Para cada agente responde:
-- ¿qué puede hacer?
-- ¿qué no debería hacer?
-- ¿qué información necesita?
-- ¿qué debe entregar?
-- ¿quién consume su salida?
+Después describe el flujo recomendado entre Orchestrator, Planner, Designer, Coder y Validator.
 
-### 3. Experimenta con el contexto
+Finalmente explica qué decisiones deberían permanecer bajo control humano.
+```
 
-Pide al Orchestrator:
+### 3. Crea docs/agent-map.md
 
-> Explica qué información necesitarías recibir antes de delegar una tarea al Planner. No modifiques ningún archivo.
+**Copia esta plantilla:**
 
-Después:
+```markdown
+# Agent Map
 
-> ¿Qué podría salir mal si el Coder recibe únicamente "construye el dashboard" sin recibir el requerimiento, restricciones ni criterios de aceptación?
+## 1. Objetivo del equipo
+...
 
-Compara las respuestas con tus propios criterios.
+## 2. Agentes
+| Agente | Responsabilidad | Entrada | Salida | Consumidor |
+|---|---|---|---|---|
+| Orchestrator | ... | ... | ... | ... |
+| Planner | ... | ... | ... | ... |
+| Designer | ... | ... | ... | ... |
+| Coder | ... | ... | ... | ... |
+| Validator | ... | ... | ... | ... |
 
-### 4. Crea docs/agent-map.md
+## 3. Flujo de handoffs
+1. ...
+2. ...
+3. ...
 
-**El archivo no existe inicialmente. Debes crearlo.**
+## 4. Información que no debe perderse
+- ...
+- ...
 
-Usa esta plantilla:
+## 5. Decisiones humanas
+- ...
 
-    # Agent Map
+## 6. Escenario de accesibilidad
+Si Validator detecta un problema:
+- quién interpreta;
+- quién decide;
+- quién implementa;
+- quién valida nuevamente.
+```
 
-    ## 1. Objetivo del equipo
-    Explica qué problema resuelve el conjunto de agentes.
+### 4. Verifica
 
-    ## 2. Agentes
-    | Agente | Responsabilidad | Entrada | Salida | Consumidor |
-    |---|---|---|---|---|
-    | Orchestrator | ... | ... | ... | ... |
-    | Planner | ... | ... | ... | ... |
-    | Designer | ... | ... | ... | ... |
-    | Coder | ... | ... | ... | ... |
-    | Validator | ... | ... | ... | ... |
+Copia y pega:
 
-    ## 3. Flujo de handoffs
-    Describe paso a paso cómo debería viajar la información.
+```text
+Revisa docs/agent-map.md contra los cinco archivos .github/agents/*.agent.md.
 
-    ## 4. Información que no debería perderse
-    - ...
-    - ...
-    - ...
+No modifiques el documento.
 
-    ## 5. Decisiones bajo control humano
-    - ...
-    - ...
+Devuelve una tabla indicando para cada agente si la responsabilidad, entrada y salida están correctamente documentadas.
+```
 
-    ## 6. Escenario de accesibilidad
-    Si Validator encuentra un problema de accesibilidad:
-    - ¿quién interpreta el hallazgo?
-    - ¿quién decide si se corrige?
-    - ¿quién implementa?
-    - ¿quién vuelve a validar?
-    - ¿por qué?
-
-### 5. Criterios de salida
-
-- [ ] Identificaste los 5 agentes.
-- [ ] Documentaste entrada y salida de cada uno.
-- [ ] Definiste los handoffs.
-- [ ] Identificaste decisiones humanas.
-- [ ] Respondiste el escenario de accesibilidad.
+Corrige el documento según los hallazgos.
 
 Haz commit y push.
 
-**Tiempo sugerido: 15-18 min.**
+**Tiempo: 12-14 min.**
