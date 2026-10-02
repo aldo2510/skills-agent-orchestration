@@ -1,25 +1,55 @@
-## Step 7: Ejecuta una segunda validación
+# Step 7 — Ejecuta una segunda validación
 
-### Teoría
-Una corrección sin nueva evidencia es solo una hipótesis. Después de modificar el producto debemos volver a validar.
+## Objetivo
+Una corrección sin nueva evidencia es una hipótesis. Validator debe comprobar nuevamente el resultado.
 
-### Copia y pega
-```text
-Vuelve a ejecutar el Validator después de las correcciones.
-Compara con el primer validation-report.
-Indica hallazgos resueltos, pendientes y evidencia.
-No corrijas código.
-```
+## 1. Prompt exacto
+~~~text
+Actúa como Validator.
 
-Añade a `docs/validation-report.md`:
+Revisa nuevamente el dashboard después de las correcciones.
 
-```markdown
+No modifiques archivos.
+
+Compara cada hallazgo de la primera validación con el estado actual.
+Para cada uno indica:
+- hallazgo original;
+- evidencia actual;
+- resultado;
+- si quedó resuelto;
+- si requiere otra iteración.
+
+Incluye también JSON, HTML, CSS, responsive y accesibilidad.
+~~~
+
+## 2. Actualiza docs/validation-report.md
+Agrega esta sección:
+
+~~~markdown
 ## Segunda ronda
-| Hallazgo | Resultado | Evidencia |
+
+| Hallazgo original | Evidencia nueva | Resultado |
 |---|---|---|
-| ... | RESUELTO/PENDIENTE | ... |
-```
+| Referencia de archivo | HTML y navegador revisados | Resuelto |
+| JSON inválido | python -m json.tool | Resuelto |
+| Problema visual | Revisión responsive | Resuelto |
 
-Haz commit y push.
+## Segunda validación
 
-**Tiempo: 7-9 min.**
+La segunda validación confirma si las correcciones resolvieron los hallazgos. Si alguno continúa abierto, debe regresar al Orchestrator.
+~~~
+
+## 3. Ejecuta verificaciones
+~~~bash
+python -m json.tool app/project-data.json
+grep -E 'styles.css|project-data.json' app/index.html
+~~~
+
+## 4. Commit
+~~~bash
+git add docs/validation-report.md app
+git commit -m "docs: record second validation"
+git push
+~~~
+
+**Tiempo sugerido: 7–9 min.**
