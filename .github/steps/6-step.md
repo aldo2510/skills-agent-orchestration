@@ -1,24 +1,51 @@
-## Step 6: Corrige mediante handoffs
+# Step 6 — Ejecuta un handoff de corrección
 
-### Teoría
-La orquestación se demuestra cuando un hallazgo viaja desde Validator hasta el agente que puede resolverlo y vuelve a validación.
+## Objetivo
+Demostrar que un hallazgo del Validator viaja hasta el agente responsable y vuelve con evidencia.
 
-### Copia y pega
-```text
-Procesa docs/validation-report.md.
-Para cada hallazgo, identifica el agente responsable, crea un handoff específico, define el cambio y cómo se comprobará.
-No implementes directamente cambios que correspondan a Designer o Coder.
-```
+## 1. Prompt exacto
+~~~text
+Actúa como Orchestrator.
 
-Actualiza `docs/coding-handoff.md`:
+Lee docs/validation-report.md.
 
-```markdown
+Para cada hallazgo:
+1. identifica al agente responsable;
+2. crea un handoff concreto;
+3. pide la corrección mínima;
+4. exige evidencia del cambio;
+5. actualiza docs/coding-handoff.md.
+
+No cierres un hallazgo sin evidencia.
+~~~
+
+## 2. Actualiza docs/coding-handoff.md
+~~~markdown
+# Coding Handoff
+
 ## Iteración de corrección
-| Hallazgo | Agente | Cambio | Evidencia |
-|---|---|---|---|
-| ... | ... | ... | ... |
-```
 
-Haz que el agente correspondiente implemente las correcciones.
+| Hallazgo | Agente | Acción | Evidencia | Estado |
+|---|---|---|---|---|
+| Referencia incorrecta | Coder | Revisar referencia | HTML revisado | Resuelto |
+| Dato inválido | Coder | Corregir JSON | python -m json.tool | Resuelto |
+| Problema visual | Designer/Coder | Ajustar layout | Revisión del navegador | Resuelto |
 
-**Tiempo: 8-10 min.**
+## Regla
+Un hallazgo pasa a Resuelto solo cuando existe evidencia verificable.
+~~~
+
+## 3. Verificación
+~~~bash
+test -f docs/coding-handoff.md
+grep -Eiq 'Iteración|hallazgo|Agente' docs/coding-handoff.md
+~~~
+
+## 4. Commit
+~~~bash
+git add docs/coding-handoff.md app
+git commit -m "docs: record correction handoff"
+git push
+~~~
+
+**Tiempo sugerido: 8–10 min.**
