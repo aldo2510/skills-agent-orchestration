@@ -1,5 +1,19 @@
 ## Step 4: Revisa la calidad de la orquestación
 
+### Teoría: evaluar la calidad del sistema
+
+Un sistema de agentes puede producir un resultado correcto y aun así estar mal orquestado.
+
+La revisión debe mirar el **proceso**, no solamente el producto:
+
+- ¿llegó el contexto correcto?
+- ¿cada agente hizo lo que correspondía?
+- ¿los handoffs fueron claros?
+- ¿hubo evidencia?
+- ¿se repitió la validación después de corregir?
+
+Esto es similar a revisar una arquitectura de software: buscamos puntos débiles antes de convertir el flujo en una práctica repetible.
+
 ### 1. Revisión automática con Orchestrator
 
 Copia y pega:
