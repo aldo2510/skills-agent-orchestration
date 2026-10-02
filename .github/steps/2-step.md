@@ -1,36 +1,22 @@
 # Step 2 — Planifica con Planner
 
 ## Objetivo
-Convertir un objetivo en un plan que otro agente pueda ejecutar sin inventar requisitos.
+Convertir el objetivo de Project Pulse en un plan que otro agente pueda ejecutar sin inventar requisitos.
 
-## 1. Prompt exacto
+## Prompt exacto
 ~~~text
 Actúa como Orchestrator.
-
-Delegá al agente Planner la planificación de Project Pulse.
-
-Debe entregar:
-- objetivo;
-- alcance;
-- requisitos;
-- estructura de datos;
-- componentes;
-- entregables;
-- criterios de aceptación;
-- riesgos;
-- handoff para Designer;
-- handoff para Coder;
-- criterios para Validator.
-
+Delega al Planner la planificación de Project Pulse.
+Debe producir objetivo, alcance, requisitos, estructura de datos, componentes, entregables, criterios de aceptación, riesgos y handoffs para Designer, Coder y Validator.
 No implementes código.
 ~~~
 
-## 2. Crea docs/project-plan.md
+## 1. Crea docs/project-plan.md
 ~~~markdown
 # Project Plan
 
 ## Objetivo
-Construir Project Pulse, un dashboard estático que muestre proyectos, estado, responsable, actualización y progreso.
+Construir Project Pulse, un dashboard estático que muestre proyectos, estado, responsable, fecha de actualización y progreso.
 
 ## Alcance
 - HTML.
@@ -69,19 +55,16 @@ Coder → Validator: archivos y evidencia.
 Validator → Orchestrator: hallazgos.
 ~~~
 
-## 3. Verificación
+## 2. Verificación
 ~~~bash
 test -f docs/project-plan.md
-grep -Eiq 'objetivo|alcance' docs/project-plan.md
-grep -Eiq 'entregables|riesgos|criterios' docs/project-plan.md
+grep -Eiq 'objetivo|alcance|entregables|riesgos|criterios' docs/project-plan.md
 grep -Eiq 'handoff|Designer|Coder|Validator' docs/project-plan.md
 ~~~
 
-## 4. Commit
+## 3. Commit
 ~~~bash
 git add docs/project-plan.md
 git commit -m "docs: create project plan"
 git push
-~~~
-
-**Tiempo sugerido: 12–14 min.**
+~~
