@@ -1,13 +1,6 @@
 name: Step 3
 
 on:
-  push:
-    paths:
-      - 'docs/design-handoff.md'
-      - 'docs/coding-handoff.md'
-      - 'docs/validation-report.md'
-      - 'docs/final-handoff.md'
-      - 'app/**'
   workflow_dispatch:
 
 permissions:
@@ -27,13 +20,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - run: test -f docs/design-handoff.md
-      - run: test -f docs/coding-handoff.md
-      - run: test -f docs/validation-report.md
-      - run: test -f docs/final-handoff.md
-      - run: test -f app/index.html
-      - run: test -f app/styles.css
-      - run: test -f app/project-data.json
+      - name: Validate orchestration evidence
+        run: |
+          test -f docs/design-handoff.md
+          test -f docs/coding-handoff.md
+          test -f docs/validation-report.md
+          test -f docs/final-handoff.md
+          test -f app/index.html
+          test -f app/styles.css
+          test -f app/project-data.json
+          grep -Eiq 'Segunda ronda|Second round|hallazgos' docs/validation-report.md
+          grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/final-handoff.md
 
   next:
     needs: [find_exercise, check]
@@ -60,3 +57,13 @@ jobs:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.STEP_FILE }}
+      - uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
+      - run: |
+          gh workflow disable "${{github.workflow}}"
+          gh workflow enable "Step 4"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
