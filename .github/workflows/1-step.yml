@@ -1,10 +1,13 @@
 name: Step 1
 
 on:
+  push:
+    paths:
+      - "docs/agent-map.md"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: write
   issues: write
 
@@ -13,15 +16,23 @@ env:
 
 jobs:
   find_exercise:
+    if: ${{ !github.event.repository.is_template }}
+    name: Find Exercise Issue
     uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.9.1
+
   check:
+    name: Validate agent map
     needs: [find_exercise]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - run: test -f docs/agent-map.md
-      - run: grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/agent-map.md
+      - run: |
+          test -f docs/agent-map.md
+          grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/agent-map.md
+          grep -Eiq 'handoff|entrada|salida' docs/agent-map.md
+
   next:
+    name: Post Step 2
     needs: [find_exercise, check]
     runs-on: ubuntu-latest
     env:
@@ -51,8 +62,9 @@ jobs:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
-      - run: |
-          gh workflow disable "${{github.workflow}}"
+      - name: Enable Step 2
+        run: |
+          gh workflow disable "${{ github.workflow }}"
           gh workflow enable "Step 2"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
