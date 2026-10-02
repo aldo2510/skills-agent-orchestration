@@ -1,0 +1,52 @@
+name: Step 5
+
+on:
+  push:
+    paths:
+      - 'docs/final-handoff.md'
+      - 'x-review.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+jobs:
+  find_exercise:
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.9.1
+  finish:
+    needs: [find_exercise]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: |
+          test -f docs/final-handoff.md
+          test -f x-review.md
+          test -f docs/validation-report.md
+      - uses: actions/checkout@v6
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.9.1
+      - uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ github.repository }}
+          issue-number: ${{ needs.find_exercise.outputs.issue-number }}
+          file: exercise-toolkit/markdown-templates/lesson-review.md
+      - uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ github.repository }}
+          issue-number: ${{ needs.find_exercise.outputs.issue-number }}
+          file: .github/steps/x-review.md
+      - uses: actions/checkout@v6
+        with:
+          repository: skills/exercise-toolkit
+          path: exercise-toolkit
+          ref: v0.9.1
+      - uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ github.repository }}
+          issue-number: ${{ needs.find_exercise.outputs.issue-number }}
+          file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
+      - uses: actions/checkout@v6
