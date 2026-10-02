@@ -1,264 +1,155 @@
-## Step 3: Orquesta diseño, desarrollo y validación
+# Step 3 — Orquesta diseño, código y validación
 
-### Teoría: del agente aislado al sistema de agentes
+## Objetivo
+Ejecutar un flujo multiagente completo con handoffs y evidencia.
 
-La diferencia entre usar varios agentes y **orquestarlos** es el flujo de información.
+## 1. Prompt al Orchestrator
+~~~text
+Actúa como Orchestrator.
 
-En este ejercicio:
+Usa docs/project-plan.md.
 
-```
-Planner
-   ↓
-Designer
-   ↓
-Coder
-   ↓
-Validator
-   ↓
-Orchestrator
-   ↓
-Coder / Designer
-   ↓
-Validator
-```
+Ejecuta por delegación:
+1. Planner entrega el plan.
+2. Designer produce el diseño.
+3. Guarda el resultado en docs/design-handoff.md.
+4. Coder implementa app/index.html, app/styles.css y app/project-data.json.
+5. Validator revisa el resultado.
+6. Guarda docs/validation-report.md.
+7. Si hay hallazgos, identifica al agente responsable.
+8. Documenta docs/coding-handoff.md.
+9. Genera docs/final-handoff.md.
 
-La segunda validación es importante porque introduce un patrón real de ingeniería: **feedback → corrección → nueva evidencia**.
+Cada handoff debe incluir contexto, tarea, restricciones, resultado y evidencia.
+No mezcles responsabilidades.
+~~~
 
-### Fase A — Designer
+## 2. Prompt para Designer
+~~~text
+Actúa como Designer.
 
-Copia y pega al Orchestrator:
+Usa docs/project-plan.md.
+No implementes código.
 
-```text
-Usa docs/project-plan.md como contexto.
+Define layout, jerarquía, tarjetas, estados, progreso, responsive y accesibilidad.
+Entrega un handoff claro para Coder.
+~~~
 
-Delega al Designer el diseño de Project Pulse.
-El Designer no debe implementar código.
-
-Debe entregar:
-- layout;
-- componentes;
-- jerarquía visual;
-- estados;
-- progreso;
-- responsive behavior;
-- accesibilidad;
-- reglas claras para Coder.
-
-Guarda el resultado como docs/design-handoff.md.
-```
-
-Crea `docs/design-handoff.md`:
-
-```markdown
+## 3. Crea docs/design-handoff.md
+~~~markdown
 # Design Handoff
 
-## Contexto recibido
-- ...
-
 ## Layout
-...
+Header superior y grid responsive de tarjetas.
 
-## Componentes
-...
-
-## Estados
-...
-
-## Progreso
-...
+## Tarjeta
+Nombre, estado, owner, fecha, progreso y porcentaje.
 
 ## Responsive
-- Desktop:
-- Tablet:
-- Mobile:
+La grilla debe adaptarse al ancho sin scroll horizontal.
 
 ## Accesibilidad
-...
+HTML semántico, headings claros, textos legibles y progreso accesible.
 
-## Reglas para Coder
-- ...
+## Handoff a Coder
+Conservar HTML, CSS y JSON separados. No usar backend.
+~~~
 
-## Trade-offs
-...
+## 4. Prompt para Coder
+~~~text
+Actúa como Coder.
 
-## Preguntas abiertas
-...
-```
-
-### Fase B — Coder
-
-Copia y pega:
-
-```text
 Usa docs/project-plan.md y docs/design-handoff.md.
 
-Delega al Coder la implementación.
+Implementa app/index.html, app/styles.css y app/project-data.json.
+Mantén separación de responsabilidades.
+No agregues backend.
+Verifica las referencias y el JSON.
+~~~
 
-Debe modificar:
-- app/index.html
-- app/styles.css
-- app/project-data.json
+## 5. Prompt para Validator
+~~~text
+Actúa como Validator.
 
-Debe conservar la separación entre estructura, estilos y datos.
-Al terminar debe mostrar los cambios y la evidencia de validación.
+No modifiques archivos.
 
-Guarda docs/coding-handoff.md.
-```
+Valida HTML, CSS, JSON, datos visibles, estados, progreso, responsive, accesibilidad y ausencia de backend.
+Para cada criterio entrega evidencia concreta y resultado.
+~~~
 
-Estructura:
-
-```markdown
-# Coding Handoff
-
-## Contexto recibido
-...
-
-## Cambios
-| Archivo | Cambio | Motivo |
-|---|---|---|
-| ... | ... | ... |
-
-## Decisiones
-...
-
-## Evidencia
-...
-
-## Incertidumbres
-...
-```
-
-### Fase C — Validator
-
-**Teoría:** un Validator no debería limitarse a decir "está bien". Debe producir evidencia que permita decidir si el trabajo cumple.
-
-Copia y pega:
-
-```text
-Usa el requerimiento original, docs/project-plan.md y docs/design-handoff.md.
-
-Delega al Validator una revisión completa.
-
-No corrijas código.
-
-Debe validar:
-- HTML;
-- CSS;
-- JSON;
-- datos;
-- estados;
-- progreso;
-- responsive;
-- accesibilidad;
-- ausencia de backend;
-- coherencia con el diseño.
-
-Debe registrar evidencia, severidad y recomendación en docs/validation-report.md.
-```
-
-Usa:
-
-```markdown
+## 6. Crea docs/validation-report.md
+~~~markdown
 # Validation Report
 
-## Resumen
-- Estado:
-- Alcance:
-
-## Checks
-| Check | Resultado | Evidencia |
+| Criterio | Resultado | Evidencia |
 |---|---|---|
-| CSS | PASS/FAIL | ... |
-| JSON | PASS/FAIL | ... |
-| Datos | PASS/FAIL | ... |
-| Estados | PASS/FAIL | ... |
-| Progreso | PASS/FAIL | ... |
-| Responsive | PASS/FAIL | ... |
-| Accesibilidad | PASS/FAIL | ... |
-| Sin backend | PASS/FAIL | ... |
+| HTML | Revisar | app/index.html |
+| CSS | Revisar | referencia styles.css |
+| JSON | Revisar | python -m json.tool |
+| Datos | Revisar | project-data.json |
+| Estados | Revisar | navegador |
+| Progreso | Revisar | navegador |
+| Responsive | Revisar | tamaños de pantalla |
+| Accesibilidad | Revisar | HTML semántico |
+| Sin backend | Revisar | estructura del repo |
 
 ## Hallazgos
-| Hallazgo | Severidad | Evidencia | Recomendación |
-|---|---|---|---|
-| ... | ... | ... | ... |
-```
+Todo hallazgo debe tener evidencia y agente responsable.
 
-### Fase D — Corrección
-
-Copia y pega:
-
-```text
-Procesa docs/validation-report.md.
-
-Para cada hallazgo:
-1. indica el agente responsable;
-2. crea un handoff específico;
-3. explica qué debe cambiar;
-4. define cómo se comprobará la corrección.
-
-No implementes directamente cambios que correspondan a Coder o Designer.
-```
-
-Actualiza `docs/coding-handoff.md` con:
-
-```markdown
-## Iteración de corrección
-| Hallazgo | Agente | Cambio | Evidencia |
-|---|---|---|---|
-| ... | ... | ... | ... |
-```
-
-### Fase E — Segunda validación
-
-Copia y pega:
-
-```text
-Vuelve a ejecutar el Validator después de las correcciones.
-
-Compara con el primer validation-report.
-
-Indica:
-- hallazgos resueltos;
-- hallazgos pendientes;
-- evidencia.
-
-No corrijas código.
-```
-
-Añade:
-
-```markdown
 ## Segunda ronda
-- Hallazgos resueltos:
-- Hallazgos pendientes:
-- Evidencia:
-```
+Después de corregir cualquier hallazgo, Validator debe volver a ejecutar la validación.
+~~~
 
-### Fase F — Handoff final
+## 7. Crea docs/coding-handoff.md
+~~~markdown
+# Coding Handoff
 
-Copia y pega:
+| Etapa | Agente | Entrada | Salida | Evidencia |
+|---|---|---|---|---|
+| Plan | Planner | Requerimiento | Plan | docs/project-plan.md |
+| Diseño | Designer | Plan | Diseño | docs/design-handoff.md |
+| Código | Coder | Diseño | Archivos | app/ |
+| Validación | Validator | Código | Hallazgos | docs/validation-report.md |
 
-```text
-Genera docs/final-handoff.md para un engineering lead que no participó en el ejercicio.
+## Regla de iteración
+Un hallazgo vuelve al agente responsable y solo se cierra con nueva evidencia.
+~~~
 
-Incluye:
-- objetivo;
-- resultado;
-- responsabilidades de cada agente;
-- decisiones;
-- validaciones;
-- iteraciones;
-- riesgos;
-- pendientes;
-- decisiones humanas.
+## 8. Crea docs/final-handoff.md
+~~~markdown
+# Final Handoff
 
-No inventes evidencia.
-```
+## Objetivo
+Project Pulse funcional y validado.
 
-### Fase G — Revisión
+## Responsabilidades
+Orchestrator coordina. Planner planifica. Designer diseña. Coder implementa. Validator valida.
 
-Abre `app/index.html` en el navegador y comprueba visualmente el resultado.
+## Evidencia
+Plan, diseño, código, validación y handoffs.
 
-Haz commit y push.
+## Riesgos
+Cambios posteriores requieren nueva validación.
 
-**Tiempo: 35-38 min.**
+## Decisión humana
+La aceptación final corresponde al participante.
+~~~
+
+## 9. Verificación
+~~~bash
+test -f docs/design-handoff.md
+test -f docs/coding-handoff.md
+test -f docs/validation-report.md
+test -f docs/final-handoff.md
+python -m json.tool app/project-data.json
+grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/final-handoff.md
+~~~
+
+## 10. Commit
+~~~bash
+git add app docs
+git commit -m "feat: orchestrate dashboard workflow"
+git push
+~~~
+
+**Tiempo sugerido: 20–25 min.**
