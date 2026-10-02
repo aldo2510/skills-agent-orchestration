@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Pulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <p class="eyebrow">Engineering portfolio</p>
+      <h1>Project Pulse</h1>
+      <p>Delivery status at a glance.</p>
+    </header>
+    <section id="projects" class="grid" aria-live="polite"></section>
+  </main>
+  <script>
+    fetch("project-data.json")
+      .then(response => response.json())
+      .then(data => {
+        document.querySelector("#projects").innerHTML = data.projects.map(project => '<article class="card"><div class="card-header"><h2>' + project.name + '</h2><span class="status">' + project.status + '</span></div><p>Owner: ' + project.owner + '</p><p>Updated: ' + project.updated + '</p><progress max="100" value="' + project.progress + '"></progress><strong>' + project.progress + '%</strong></article>').join("");
+      });
+  </script>
+</body>
+</html>
