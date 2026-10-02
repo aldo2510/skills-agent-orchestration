@@ -27,10 +27,10 @@ Copia este ejercicio a tu cuenta usando Copy Exercise.
 
 ## Progresión
 
-1. Conoce el equipo de agentes — 15-18 min.
-2. Planifica con Planner — 15-18 min.
-3. Orquesta diseño, desarrollo y validación — 40-45 min.
-4. Revisa la calidad de la orquestación — 12-15 min.
+1. Conoce el equipo de agentes — 12-14 min.
+2. Planifica con Planner — 12-14 min.
+3. Orquesta diseño, desarrollo y validación — 35-38 min.
+4. Revisa la calidad de la orquestación — 10-12 min.
 5. Handoff final y revisión humana — 10-12 min.
 
 ## Regla del laboratorio
