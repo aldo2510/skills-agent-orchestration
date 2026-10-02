@@ -1,35 +1,7 @@
-## Step 3: (replace-me: STEP-NAME)
+## Step 3: Orquesta diseño y desarrollo
 
-(replace-me: OPTIONAL Brief story or scenario to introduce the step)
+Pide al Orchestrator que delegue al Designer la estructura visual, al Coder la implementación y al Validator la estrategia de validación.
 
-### 📖 Theory: (replace-me: Theory title)
+El resultado debe producir `app/index.html`, `app/styles.css`, `app/project-data.json`, `docs/design-handoff.md` y `docs/coding-handoff.md`.
 
-<!-- GitHub-styled notifications can be used outside of ordered lists. Available options are: NOTE, IMPORTANT, WARNING, TIP, CAUTION -->
-<!--
-> [!NOTE]
-> (Important note or additional information relevant to this section)
- -->
-
-(replace-me: Optional theory or background information relevant to this step)
-
-### ⌨️ Activity: (replace-me: Activity title)
-
-1. (replace-me: First instruction)
-
-   (replace-me: Make sure to properly indent any multiline instructions)
-
-1. (replace-me: Second instruction)
-
-   (replace-me: Optionally reference images from the `.github/images/` directory to support any part of the content)
-
-   <img width="200" alt="descriptive alt text" src="../images/jetpacktocat.png" />
-
-1. (replace-me: Additional instructions as needed)
-
-<details>
-<summary>Having trouble? 🤷</summary><br/>
-
-- (replace-me: Troubleshooting tip or hint)
-- (replace-me: Additional troubleshooting tips as needed)
-
-</details>
+Revisa los cambios antes de aceptarlos.
