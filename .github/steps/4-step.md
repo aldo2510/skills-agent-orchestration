@@ -1,10 +1,11 @@
-## Step 4: Revisión de calidad del equipo
+## Step 4: Revisa la calidad de la orquestación
 
-> **Idea clave:** un flujo puede terminar y aun así estar mal orquestado. Aquí evalúas la calidad del proceso, no solo el dashboard.
+### 1. Revisión automática con Orchestrator
 
-### 1. Revisa toda la cadena
+Copia y pega:
 
-Lee:
+```text
+Revisa:
 - docs/agent-map.md
 - docs/project-plan.md
 - docs/design-handoff.md
@@ -12,68 +13,71 @@ Lee:
 - docs/validation-report.md
 - docs/final-handoff.md
 
-Busca:
+Actúa como engineering lead.
 
-**Contexto perdido**
-- ¿el siguiente agente recibió suficiente información?
+No modifiques archivos.
 
-**Responsabilidad incorrecta**
-- ¿algún agente hizo algo que correspondía a otro?
+Identifica:
+1. contexto perdido;
+2. responsabilidades solapadas;
+3. handoffs ambiguos;
+4. decisiones sin evidencia;
+5. validaciones insuficientes.
 
-**Evidencia insuficiente**
-- ¿alguien afirmó que algo funciona sin demostrarlo?
+Para cada hallazgo indica documento, evidencia y mejora concreta.
+```
 
-**Ambigüedad**
-- ¿algún handoff obligó al siguiente agente a adivinar?
+### 2. Crea docs/orchestration-review.md
 
-### 2. Pide una revisión al Orchestrator
+```markdown
+# Orchestration Review
 
-Usa:
+## 1. Handoff que funcionó bien
+- Evidencia:
+- Motivo:
 
-> Revisa todo el flujo de agentes como un engineering lead. Busca handoffs incompletos, decisiones sin evidencia, responsabilidades solapadas, instrucciones ambiguas y validaciones faltantes. No cambies código. Propón mejoras concretas.
+## 2. Handoff que podría mejorar
+- Evidencia:
+- Información faltante:
+- Mejora:
 
-Crea docs/orchestration-review.md con:
+## 3. Responsabilidades solapadas
+- ...
 
-    # Orchestration Review
+## 4. Evidencia insuficiente
+- ...
 
-    ## 1. Handoff que funcionó bien
-    - Qué ocurrió:
-    - Por qué funcionó:
+## 5. Decisión que debe permanecer bajo control humano
+- ...
 
-    ## 2. Handoff que podría mejorar
-    - Qué información faltó:
-    - Cómo lo mejoraría:
+## 6. Mejora propuesta para Orchestrator
+- ...
 
-    ## 3. Responsabilidades solapadas
-    - ...
+## 7. Flujo V2
+1. ...
+2. ...
+3. ...
+```
 
-    ## 4. Evidencia insuficiente
-    - ...
+### 3. Verificación
 
-    ## 5. Decisión que debe permanecer bajo control humano
-    - ...
+Copia y pega:
 
-    ## 6. Mejora propuesta para el Orchestrator
-    - ...
+```text
+Revisa docs/orchestration-review.md.
 
-### 3. Diseña una versión 2
+Comprueba que contiene al menos:
+- un handoff positivo;
+- un handoff mejorable;
+- una decisión humana;
+- una mejora del Orchestrator;
+- un flujo V2.
 
-Propón un flujo mejorado.
+No modifiques el archivo. Devuelve los elementos faltantes.
+```
 
-Explica:
-- qué cambiarías;
-- por qué;
-- qué problema del flujo actual resuelve;
-- qué nuevo handoff necesitarías.
-
-### 4. Criterios de salida
-
-- [ ] Revisaste todos los handoffs.
-- [ ] Identificaste al menos un punto fuerte.
-- [ ] Identificaste al menos una mejora.
-- [ ] Identificaste una decisión humana.
-- [ ] Propusiste una versión 2.
+Completa lo que falte.
 
 Haz commit y push.
 
-**Tiempo sugerido: 12-15 min.**
+**Tiempo: 10-12 min.**
