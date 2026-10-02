@@ -3,24 +3,18 @@
 ## Objetivo
 Cerrar el ejercicio con una decisión humana explícita basada en evidencia.
 
-## 1. Prompt final
+## Prompt final
 ~~~text
 Revisa todo el ejercicio de Agent Orchestration.
-
 No modifiques archivos.
-
-Resume:
-1. qué agente hizo cada trabajo;
-2. qué handoffs fueron importantes;
-3. qué iteración ocurrió;
-4. qué evidencia existe;
-5. qué riesgos permanecen;
-6. qué decisión debe tomar el humano.
-
+Resume qué agente hizo cada trabajo, qué handoffs fueron importantes, qué iteraciones ocurrieron, qué evidencia existe, qué riesgos permanecen y qué decisión debe tomar el humano.
 No escribas código.
 ~~~
 
-## 2. Actualiza x-review.md
+## 1. Actualiza x-review.md
+
+Reemplaza su contenido por:
+
 ~~~markdown
 # Human Review
 
@@ -46,26 +40,27 @@ Orchestrator → Planner → Designer → Coder → Validator → corrección �
 - [ ] Los riesgos están documentados.
 
 ## Decisión humana
-La persona participante decide si el resultado cumple el objetivo y si existe evidencia suficiente para cerrarlo.
+**Resultado:** Acepto / Acepto con observaciones / Requiere corrección
+
+**Motivo:** Escribe aquí la decisión basada en evidencia real.
 
 ## Conclusión
 La orquestación aporta valor cuando coordina especialistas, conserva contexto y obliga a validar. La decisión final no se delega automáticamente al sistema de agentes.
 ~~~
 
-## 3. Validación final
+## 2. Validación final
 ~~~bash
 test -f x-review.md
 test -f docs/final-handoff.md
 test -f docs/orchestration-review.md
-grep -Eiq 'Segunda ronda|segunda validación|hallazgos resueltos' docs/validation-report.md
+grep -Eiq 'Segunda ronda|segunda validación' docs/validation-report.md
 ~~~
 
-## 4. Commit y push
+## 3. Commit y push
 ~~~bash
 git add x-review.md
 git commit -m "docs: complete final human review"
 git push
 ~~~
 
-No cierres el ejercicio por tu cuenta: espera la validación de GitHub Skills.
-**Tiempo sugerido: 10–12 min.**
+No cierres el ejercicio manualmente; espera la validación de GitHub Skills.
