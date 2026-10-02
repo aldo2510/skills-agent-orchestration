@@ -1,16 +1,29 @@
 ## Review
 
-_Congratulations, you've completed this exercise and learned a lot about (replace-me: feature/product that was taught in this exercise)
+# Agent Orchestration: revisión final
 
-<img src="https://octodex.github.com/images/jetpacktocat.png" alt="celebrate" width=200 align=right>
+Has recorrido un flujo completo:
 
-Here's a recap of your accomplishments:
+**Orchestrator → Planner → Designer → Coder → Validator → Human review**
 
-- (replace-me: Accomplishment #1)
-- (replace-me: Accomplishment #N)
+### Evidencia
 
-### What's next?
+Revisa que existan:
+- docs/agent-map.md
+- docs/project-plan.md
+- docs/design-handoff.md
+- docs/coding-handoff.md
+- docs/validation-report.md
+- docs/final-handoff.md
+- x-review.md
 
-- (replace-me: Natural follow up Skills exercise - if there is one)
-- (replace-me: Documentation link to learn more about the feature)
-- (replace-me: Other resources or calls to action)
+### Reflexión
+
+Responde:
+1. ¿Qué contexto tuvo que pasar entre agentes?
+2. ¿Qué información se perdió o quedó ambigua?
+3. ¿Qué tarea fue mejor delegar?
+4. ¿Dónde fue necesaria la revisión humana?
+5. ¿Qué cambiarías en la arquitectura del equipo de agentes?
+
+La orquestación no consiste solo en llamar agentes: consiste en darles contexto, límites, criterios de salida y mecanismos de validación.
