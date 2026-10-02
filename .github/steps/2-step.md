@@ -1,154 +1,87 @@
-## Step 2: Planifica con Planner
+# Step 2 — Planifica con Planner
 
-### Teoría: planificación y handoffs
+## Objetivo
+Convertir un objetivo en un plan que otro agente pueda ejecutar sin inventar requisitos.
 
-En un equipo de agentes, un plan no sirve solamente para saber "qué hacer". Sirve para **transportar contexto** entre especialistas.
+## 1. Prompt exacto
+~~~text
+Actúa como Orchestrator.
 
-Un handoff de calidad responde:
+Delegá al agente Planner la planificación de Project Pulse.
 
-```
-¿Qué recibí?
-¿Qué debo hacer?
-¿Qué restricciones tengo?
-¿Qué debo entregar?
-¿Cómo sabrá el siguiente agente que terminé correctamente?
-```
-
-Si falta alguno de estos elementos, el siguiente agente puede interpretar el trabajo de otra manera.
-
-### Requerimiento
-
-Construir un dashboard Project Pulse que muestre:
-- nombre del proyecto;
-- estado;
-- progreso;
-- responsable;
-- fecha de actualización.
-
-Debe ser responsive y funcionar sin backend.
-
-### 1. Copia y pega en Orchestrator
-
-```text
-Usa el requerimiento de Project Pulse.
-
-No implementes código.
-
-Divide el trabajo entre Planner, Designer, Coder y Validator.
-Indica exactamente qué contexto debe recibir cada agente y qué salida debe entregar para el siguiente agente.
-```
-
-### 2. Delega al Planner
-
-```text
-Convierte el requerimiento de Project Pulse en un plan ejecutable.
-
-Incluye:
+Debe entregar:
 - objetivo;
 - alcance;
-- fuera de alcance;
+- requisitos;
+- estructura de datos;
+- componentes;
 - entregables;
-- dependencias;
-- riesgos;
 - criterios de aceptación;
-- estrategia de validación;
-- información necesaria para Designer;
-- información necesaria para Coder;
-- información necesaria para Validator.
+- riesgos;
+- handoff para Designer;
+- handoff para Coder;
+- criterios para Validator.
 
 No implementes código.
-```
+~~~
 
-### 3. Crea docs/project-plan.md
+## 2. Crea docs/project-plan.md
+~~~markdown
+# Project Plan
 
-**Copia esta plantilla:**
+## Objetivo
+Construir Project Pulse, un dashboard estático que muestre proyectos, estado, responsable, actualización y progreso.
 
-```markdown
-# Project Pulse - Plan
+## Alcance
+- HTML.
+- CSS separado.
+- JSON separado.
+- Sin backend.
+- Responsive.
+- Accesibilidad básica.
 
-## 1. Objetivo
-...
-
-## 2. Alcance
-### Incluido
-- ...
-### Fuera de alcance
-- ...
-
-## 3. Entregables
+## Entregables
 - app/index.html
 - app/styles.css
 - app/project-data.json
-- documentación de handoffs
+- docs/design-handoff.md
+- docs/coding-handoff.md
+- docs/validation-report.md
+- docs/final-handoff.md
 
-## 4. Responsabilidades
-| Agente | Responsabilidad |
-|---|---|
-| Planner | ... |
-| Designer | ... |
-| Coder | ... |
-| Validator | ... |
+## Criterios de aceptación
+- HTML carga CSS y JSON.
+- Todos los proyectos aparecen.
+- Cada tarjeta muestra nombre, estado, owner, fecha y progreso.
+- El layout se adapta a pantallas pequeñas.
+- No requiere backend.
 
-## 5. Dependencias
-- ...
+## Riesgos
+- JSON inválido.
+- Referencias rotas.
+- Problemas responsive.
+- Datos inconsistentes.
 
-## 6. Criterios de aceptación
-- ...
-- ...
-- ...
+## Handoffs
+Planner → Designer: requisitos visuales.
+Designer → Coder: diseño y restricciones.
+Coder → Validator: archivos y evidencia.
+Validator → Orchestrator: hallazgos.
+~~~
 
-## 7. Estrategia de validación
-- ...
+## 3. Verificación
+~~~bash
+test -f docs/project-plan.md
+grep -Eiq 'objetivo|alcance' docs/project-plan.md
+grep -Eiq 'entregables|riesgos|criterios' docs/project-plan.md
+grep -Eiq 'handoff|Designer|Coder|Validator' docs/project-plan.md
+~~~
 
-## 8. Riesgos
-| Riesgo | Impacto | Mitigación |
-|---|---|---|
-| ... | ... | ... |
+## 4. Commit
+~~~bash
+git add docs/project-plan.md
+git commit -m "docs: create project plan"
+git push
+~~~
 
-## 9. Calidad del handoff
-- Información imprescindible para Designer:
-- Información imprescindible para Coder:
-- Información imprescindible para Validator:
-
-## 10. Decisiones humanas
-- ...
-```
-
-### 4. Revisa el plan
-
-Copia y pega:
-
-```text
-Revisa docs/project-plan.md contra el requerimiento.
-
-No modifiques archivos.
-
-Devuelve:
-- requisito;
-- dónde está cubierto;
-- evidencia;
-- información faltante.
-
-Después revisa si existe algún cambio innecesario.
-```
-
-Aplica las correcciones.
-
-### 5. Handoff defectuoso
-
-Ahora observa un caso típico de orquestación: entregar contexto incompleto.
-
-Copia y pega:
-
-```text
-Explica qué problemas tendría Designer si recibe un plan sin criterios de aceptación.
-
-Después muestra cómo debería modificarse docs/project-plan.md para evitar esa ambigüedad.
-No modifiques archivos.
-```
-
-Aplica la mejora indicada.
-
-Haz commit y push.
-
-**Tiempo: 12-14 min.**
+**Tiempo sugerido: 12–14 min.**
