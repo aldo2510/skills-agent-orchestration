@@ -1,7 +1,33 @@
 ## Step 1: Conoce el equipo de agentes
 
-### Objetivo
-Entender qué hace cada agente y cómo debe viajar el contexto.
+### Teoría: qué es la orquestación de agentes
+
+Un agente especializado no debería recibir todas las responsabilidades.
+
+La orquestación consiste en dividir el trabajo y controlar el flujo:
+
+```
+Objetivo
+   ↓
+Orchestrator
+   ↓
+Agentes especializados
+   ↓
+Handoffs
+   ↓
+Validación
+   ↓
+Humano
+```
+
+Cada agente debe tener:
+- una responsabilidad clara;
+- contexto suficiente;
+- límites;
+- una salida definida;
+- un consumidor para su resultado.
+
+El Orchestrator no reemplaza a los especialistas: **coordina el trabajo y mantiene el contexto**.
 
 ### 1. Inspecciona los agentes
 
