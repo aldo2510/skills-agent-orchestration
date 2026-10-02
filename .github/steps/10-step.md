@@ -1,59 +1,71 @@
-## Step 10: Revisión humana final
+# Step 10 — Revisión humana final
 
-### Teoría
-Human-in-the-loop significa que los agentes ejecutan trabajo, pero una persona mantiene el control de las decisiones relevantes y acepta el resultado final.
+## Objetivo
+Cerrar el ejercicio con una decisión humana explícita basada en evidencia.
 
-### Copia y pega
-```text
-Haz una revisión final del ejercicio.
+## 1. Prompt final
+~~~text
+Revisa todo el ejercicio de Agent Orchestration.
+
 No modifiques archivos.
-Comprueba que existan todos los documentos y que validation-report.md tenga una segunda ronda.
-Devuelve una checklist PASS/FAIL con evidencia.
-```
 
-Revisa manualmente:
-- dashboard;
-- datos;
-- handoffs;
-- validation-report.md;
-- orchestration-review.md;
-- final-handoff.md.
+Resume:
+1. qué agente hizo cada trabajo;
+2. qué handoffs fueron importantes;
+3. qué iteración ocurrió;
+4. qué evidencia existe;
+5. qué riesgos permanecen;
+6. qué decisión debe tomar el humano.
 
-Completa `x-review.md`:
+No escribas código.
+~~~
 
-```markdown
+## 2. Actualiza x-review.md
+~~~markdown
 # Human Review
-## 1. Contexto que viajó entre agentes
-...
 
-## 2. Información perdida o ambigua
-...
+## Flujo revisado
+Orchestrator → Planner → Designer → Coder → Validator → corrección → Validator → Orchestrator → humano.
 
-## 3. Mejor delegación
-...
+## Evidencia revisada
+- docs/agent-map.md
+- docs/project-plan.md
+- docs/design-handoff.md
+- docs/coding-handoff.md
+- docs/validation-report.md
+- docs/final-handoff.md
+- docs/orchestration-review.md
 
-## 4. Delegación que mejoraría
-...
+## Checklist
+- [ ] Cada agente tiene responsabilidad clara.
+- [ ] Los handoffs contienen contexto y salida.
+- [ ] Los hallazgos tienen evidencia.
+- [ ] Existe segunda validación.
+- [ ] El handoff final es comprensible.
+- [ ] El dashboard fue revisado directamente.
+- [ ] Los riesgos están documentados.
 
-## 5. Intervención humana
-...
+## Decisión humana
+La persona participante decide si el resultado cumple el objetivo y si existe evidencia suficiente para cerrarlo.
 
-## 6. Recomendación modificada o rechazada
-...
+## Conclusión
+La orquestación aporta valor cuando coordina especialistas, conserva contexto y obliga a validar. La decisión final no se delega automáticamente al sistema de agentes.
+~~~
 
-## 7. Problema descubierto manualmente
-...
+## 3. Validación final
+~~~bash
+test -f x-review.md
+test -f docs/final-handoff.md
+test -f docs/orchestration-review.md
+grep -Eiq 'Segunda ronda|segunda validación|hallazgos resueltos' docs/validation-report.md
+~~~
 
-## 8. Diferencia entre generar y orquestar
-...
+## 4. Commit y push
+~~~bash
+git add x-review.md
+git commit -m "docs: complete final human review"
+git push
+~~~
 
-## 9. Qué automatizaría
-...
-
-## 10. Qué mantendría bajo control humano
-...
-```
-
-Haz commit y push.
-
-**Tiempo: 10-12 min.**
+No cierres el ejercicio por tu cuenta: espera la validación de GitHub Skills.
+**Tiempo sugerido: 10–12 min.**
