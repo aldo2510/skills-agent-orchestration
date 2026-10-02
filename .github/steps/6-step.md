@@ -3,26 +3,19 @@
 ## Objetivo
 Demostrar que un hallazgo del Validator viaja hasta el agente responsable y vuelve con evidencia.
 
-## 1. Prompt exacto
+## Prompt exacto
 ~~~text
 Actúa como Orchestrator.
-
 Lee docs/validation-report.md.
-
-Para cada hallazgo:
-1. identifica al agente responsable;
-2. crea un handoff concreto;
-3. pide la corrección mínima;
-4. exige evidencia del cambio;
-5. actualiza docs/coding-handoff.md.
-
+Para cada hallazgo identifica al agente responsable, crea un handoff concreto, pide la corrección mínima, exige evidencia y actualiza docs/coding-handoff.md.
 No cierres un hallazgo sin evidencia.
 ~~~
 
-## 2. Actualiza docs/coding-handoff.md
-~~~markdown
-# Coding Handoff
+## 1. Actualiza docs/coding-handoff.md
 
+Copia esta sección al final:
+
+~~~markdown
 ## Iteración de corrección
 
 | Hallazgo | Agente | Acción | Evidencia | Estado |
@@ -35,17 +28,17 @@ No cierres un hallazgo sin evidencia.
 Un hallazgo pasa a Resuelto solo cuando existe evidencia verificable.
 ~~~
 
-## 3. Verificación
+Si el Validator no encontró esos hallazgos, reemplaza las filas por los hallazgos reales. No inventes resultados.
+
+## 2. Verificación
 ~~~bash
 test -f docs/coding-handoff.md
 grep -Eiq 'Iteración|hallazgo|Agente' docs/coding-handoff.md
 ~~~
 
-## 4. Commit
+## 3. Commit
 ~~~bash
 git add docs/coding-handoff.md app
 git commit -m "docs: record correction handoff"
 git push
-~~~
-
-**Tiempo sugerido: 8–10 min.**
+~~
