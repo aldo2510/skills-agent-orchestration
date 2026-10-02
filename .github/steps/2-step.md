@@ -1,36 +1,7 @@
-## Step 2: (replace-me: STEP-NAME)
+## Step 2: Pide al Orchestrator un plan
 
-(replace-me: OPTIONAL Brief story or scenario to introduce the step)
+Requerimiento: construir un dashboard Project Pulse que muestre nombre del proyecto, estado, progreso, responsable y fecha de actualización. Debe ser simple, responsive y funcionar sin backend.
 
-### 📖 Theory: (replace-me: Theory title)
+Usa Copilot CLI y el agente Orchestrator. Pídele que coordine al Planner para producir un plan sin implementar.
 
-<!-- GitHub-styled notifications can be used outside of ordered lists. Available options are: NOTE, IMPORTANT, WARNING, TIP, CAUTION -->
-<!--
-> [!NOTE]
-> (Important note or additional information relevant to this section)
- -->
-
-(replace-me: Optional theory or background information relevant to this step)
-
-(replace-me: OPTIONAL Reference images from the `.github/images/` directory to support any part of the content)
-
-<img width="200" alt="descriptive alt text" src="../images/inflatocat.png" />
-
-
-### ⌨️ Activity: (replace-me: Activity title)
-
-1. (replace-me: First instruction)
-
-    (replace-me: Make sure to properly indent any multiline instructions)
-
-1. (replace-me: Second instruction)
-
-1. (replace-me: Additional instructions as needed)
-
-<details>
-<summary>Having trouble? 🤷</summary><br/>
-
-- (replace-me: Troubleshooting tip or hint)
-- (replace-me: Additional troubleshooting tips as needed)
-
-</details>
+Guarda el resultado en `docs/project-plan.md` con fases, entregables y dependencias.
