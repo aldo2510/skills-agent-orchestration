@@ -1,75 +1,108 @@
 ## Step 5: Handoff final y revisión humana
 
-> **Idea clave:** el resultado final de un equipo de agentes no es solo código. También debe existir una explicación de qué se hizo, con qué contexto, qué se validó y qué decisiones siguen siendo humanas.
+### 1. Genera el handoff final
 
-### 1. Revisa o actualiza docs/final-handoff.md
+Copia y pega:
 
-Pide al Orchestrator:
+```text
+Actualiza docs/final-handoff.md para un engineering lead que no participó en el ejercicio.
 
-> Produce un handoff final para un engineering lead que no participó en la sesión. Resume objetivo, arquitectura del flujo de agentes, decisiones, cambios, validaciones, iteraciones, riesgos y pendientes. No inventes evidencia.
-
-Comprueba que incluya:
+Incluye:
 - objetivo y resultado;
-- responsabilidades de los cinco agentes;
+- flujo de los cinco agentes;
+- trabajo realizado por cada agente;
 - decisiones relevantes;
 - evidencia de validación;
+- segunda ronda de validación;
 - iteraciones;
-- riesgos y pendientes;
+- riesgos;
+- pendientes;
 - decisiones humanas.
 
-### 2. Revisión manual obligatoria
+Usa únicamente evidencia existente en el repositorio.
+No inventes información.
+```
+
+### 2. Revisión manual
+
+Abre en el navegador:
+- app/index.html.
 
 Revisa:
-1. dashboard en navegador;
-2. project-data.json;
-3. todos los handoffs;
-4. validation-report.md;
-5. orchestration-review.md;
-6. final-handoff.md.
+- dashboard;
+- datos;
+- responsive;
+- textos;
+- estados;
+- progreso.
 
-Busca al menos un problema que la IA no haya detectado. Si no encuentras ninguno, documenta una comprobación adicional que hayas realizado.
+Después revisa:
+- todos los handoffs;
+- validation-report.md;
+- orchestration-review.md;
+- final-handoff.md.
 
-### 3. Completa x-review.md
+### 3. Crea x-review.md
 
-**El archivo no existe inicialmente. Debes crearlo.**
+**Copia esta plantilla:**
 
-Usa:
+```markdown
+# Human Review
 
-    # Human Review
+## 1. Contexto entre agentes
+¿Qué información viajó entre agentes?
+...
 
-    ## 1. Contexto entre agentes
-    ¿Qué información tuvo que viajar?
+## 2. Información perdida o ambigua
+...
 
-    ## 2. Información perdida o ambigua
-    ...
+## 3. Mejor delegación
+...
 
-    ## 3. Mejor delegación
-    ...
+## 4. Peor delegación
+...
 
-    ## 4. Peor delegación
-    ...
+## 5. Intervención humana
+...
 
-    ## 5. Intervención humana
-    ...
+## 6. Recomendación modificada o rechazada
+...
 
-    ## 6. Recomendación modificada o rechazada
-    ...
+## 7. Problema descubierto manualmente
+...
 
-    ## 7. Problema descubierto manualmente
-    ...
+## 8. Cambio que haría a la arquitectura
+...
 
-    ## 8. Cambio que haría a la arquitectura
-    ...
+## 9. Generar vs. orquestar
+¿Qué diferencia observaste?
+...
+```
 
-    ## 9. Generar vs. orquestar
-    ¿Qué aprendiste sobre la diferencia?
+### 4. Revisión final con Orchestrator
 
-### 4. Cierre
+Copia y pega:
+
+```text
+Haz una revisión final del ejercicio.
+
+No modifiques archivos.
+
+Comprueba que existan:
+- docs/agent-map.md
+- docs/project-plan.md
+- docs/design-handoff.md
+- docs/coding-handoff.md
+- docs/validation-report.md
+- docs/orchestration-review.md
+- docs/final-handoff.md
+- x-review.md
+
+Comprueba también que validation-report.md tenga una segunda ronda.
+
+Devuelve una checklist PASS/FAIL.
+```
 
 Haz commit y push.
 
-El objetivo final es demostrar:
-
-**contexto + responsabilidades + límites + handoffs + validación + intervención humana.**
-
-**Tiempo sugerido: 10-12 min.**
+**Tiempo: 10-12 min.**
