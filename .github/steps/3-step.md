@@ -1,41 +1,29 @@
-# Step 3 — Orquesta diseño, código y validación
+# Step 3 — Diseña e implementa mediante handoffs
 
 ## Objetivo
-Ejecutar un flujo multiagente completo con handoffs y evidencia.
+Ejecutar el flujo Planner → Designer → Coder → Validator, conservando evidencia en cada transición.
 
-## 1. Prompt al Orchestrator
+## Prompt al Orchestrator
 ~~~text
 Actúa como Orchestrator.
-
 Usa docs/project-plan.md.
-
-Ejecuta por delegación:
-1. Planner entrega el plan.
-2. Designer produce el diseño.
-3. Guarda el resultado en docs/design-handoff.md.
-4. Coder implementa app/index.html, app/styles.css y app/project-data.json.
-5. Validator revisa el resultado.
-6. Guarda docs/validation-report.md.
-7. Si hay hallazgos, identifica al agente responsable.
-8. Documenta docs/coding-handoff.md.
-9. Genera docs/final-handoff.md.
-
-Cada handoff debe incluir contexto, tarea, restricciones, resultado y evidencia.
+Delega primero al Designer y guarda docs/design-handoff.md.
+Después delega al Coder para implementar app/index.html, app/styles.css y app/project-data.json.
+Finalmente delega al Validator para revisar el resultado y guardar docs/validation-report.md.
+Cada handoff debe incluir contexto, objetivo, restricciones, resultado y evidencia.
 No mezcles responsabilidades.
 ~~~
 
-## 2. Prompt para Designer
+## Prompt para Designer
 ~~~text
 Actúa como Designer.
-
 Usa docs/project-plan.md.
 No implementes código.
-
-Define layout, jerarquía, tarjetas, estados, progreso, responsive y accesibilidad.
+Define layout, jerarquía visual, tarjetas, estados, progreso, responsive y accesibilidad.
 Entrega un handoff claro para Coder.
 ~~~
 
-## 3. Crea docs/design-handoff.md
+## 1. Crea docs/design-handoff.md
 ~~~markdown
 # Design Handoff
 
@@ -51,56 +39,55 @@ La grilla debe adaptarse al ancho sin scroll horizontal.
 ## Accesibilidad
 HTML semántico, headings claros, textos legibles y progreso accesible.
 
+## Restricciones
+No backend. HTML, CSS y JSON separados.
+
 ## Handoff a Coder
-Conservar HTML, CSS y JSON separados. No usar backend.
+Implementar únicamente el alcance definido y conservar la separación entre estructura, estilos y datos.
 ~~~
 
-## 4. Prompt para Coder
+## Prompt para Coder
 ~~~text
 Actúa como Coder.
-
 Usa docs/project-plan.md y docs/design-handoff.md.
-
 Implementa app/index.html, app/styles.css y app/project-data.json.
 Mantén separación de responsabilidades.
 No agregues backend.
-Verifica las referencias y el JSON.
+Verifica referencias y JSON.
 ~~~
 
-## 5. Prompt para Validator
+## Prompt para Validator
 ~~~text
 Actúa como Validator.
-
 No modifiques archivos.
-
 Valida HTML, CSS, JSON, datos visibles, estados, progreso, responsive, accesibilidad y ausencia de backend.
-Para cada criterio entrega evidencia concreta y resultado.
+Para cada criterio entrega resultado y evidencia concreta.
 ~~~
 
-## 6. Crea docs/validation-report.md
+## 2. Crea docs/validation-report.md
 ~~~markdown
 # Validation Report
 
 | Criterio | Resultado | Evidencia |
 |---|---|---|
-| HTML | Revisar | app/index.html |
-| CSS | Revisar | referencia styles.css |
-| JSON | Revisar | python -m json.tool |
-| Datos | Revisar | project-data.json |
-| Estados | Revisar | navegador |
-| Progreso | Revisar | navegador |
-| Responsive | Revisar | tamaños de pantalla |
-| Accesibilidad | Revisar | HTML semántico |
-| Sin backend | Revisar | estructura del repo |
+| HTML | Cumple | app/index.html |
+| CSS | Cumple | app/styles.css |
+| JSON | Cumple | python -m json.tool app/project-data.json |
+| Datos | Cumple | app/project-data.json |
+| Estados | Verificar | navegador |
+| Progreso | Verificar | navegador |
+| Responsive | Verificar | navegador en varios tamaños |
+| Accesibilidad | Verificar | HTML semántico |
+| Sin backend | Cumple | estructura del repositorio |
 
 ## Hallazgos
-Todo hallazgo debe tener evidencia y agente responsable.
+Registrar cada hallazgo con agente responsable y evidencia.
 
-## Segunda ronda
-Después de corregir cualquier hallazgo, Validator debe volver a ejecutar la validación.
+## Regla de cierre
+Un hallazgo solo se cierra cuando existe nueva evidencia.
 ~~~
 
-## 7. Crea docs/coding-handoff.md
+## 3. Crea docs/coding-handoff.md
 ~~~markdown
 # Coding Handoff
 
@@ -115,41 +102,18 @@ Después de corregir cualquier hallazgo, Validator debe volver a ejecutar la val
 Un hallazgo vuelve al agente responsable y solo se cierra con nueva evidencia.
 ~~~
 
-## 8. Crea docs/final-handoff.md
-~~~markdown
-# Final Handoff
-
-## Objetivo
-Project Pulse funcional y validado.
-
-## Responsabilidades
-Orchestrator coordina. Planner planifica. Designer diseña. Coder implementa. Validator valida.
-
-## Evidencia
-Plan, diseño, código, validación y handoffs.
-
-## Riesgos
-Cambios posteriores requieren nueva validación.
-
-## Decisión humana
-La aceptación final corresponde al participante.
-~~~
-
-## 9. Verificación
+## 4. Verificación
 ~~~bash
 test -f docs/design-handoff.md
 test -f docs/coding-handoff.md
 test -f docs/validation-report.md
-test -f docs/final-handoff.md
 python -m json.tool app/project-data.json
-grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/final-handoff.md
+grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/coding-handoff.md
 ~~~
 
-## 10. Commit
+## 5. Commit
 ~~~bash
 git add app docs
 git commit -m "feat: orchestrate dashboard workflow"
 git push
-~~~
-
-**Tiempo sugerido: 20–25 min.**
+~~
