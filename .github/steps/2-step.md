@@ -1,5 +1,21 @@
 ## Step 2: Planifica con Planner
 
+### Teoría: planificación y handoffs
+
+En un equipo de agentes, un plan no sirve solamente para saber "qué hacer". Sirve para **transportar contexto** entre especialistas.
+
+Un handoff de calidad responde:
+
+```
+¿Qué recibí?
+¿Qué debo hacer?
+¿Qué restricciones tengo?
+¿Qué debo entregar?
+¿Cómo sabrá el siguiente agente que terminé correctamente?
+```
+
+Si falta alguno de estos elementos, el siguiente agente puede interpretar el trabajo de otra manera.
+
 ### Requerimiento
 
 Construir un dashboard Project Pulse que muestre:
@@ -44,6 +60,8 @@ No implementes código.
 ```
 
 ### 3. Crea docs/project-plan.md
+
+**Copia esta plantilla:**
 
 ```markdown
 # Project Pulse - Plan
@@ -117,6 +135,8 @@ Después revisa si existe algún cambio innecesario.
 Aplica las correcciones.
 
 ### 5. Handoff defectuoso
+
+Ahora observa un caso típico de orquestación: entregar contexto incompleto.
 
 Copia y pega:
 
