@@ -1,28 +1,30 @@
 ## Step 4: Revisión de calidad del equipo
 
-> **Idea clave:** un flujo puede "terminar" y aun así estar mal orquestado. Aquí vas a evaluar la calidad del proceso, no solo el resultado visual.
+> **Idea clave:** un flujo puede terminar y aun así estar mal orquestado. Aquí evalúas la calidad del proceso, no solo el dashboard.
 
-### 1. Revisa los handoffs
+### 1. Revisa toda la cadena
 
 Lee:
+- docs/agent-map.md
+- docs/project-plan.md
+- docs/design-handoff.md
+- docs/coding-handoff.md
+- docs/validation-report.md
+- docs/final-handoff.md
 
-- `docs/agent-map.md`;
-- `docs/project-plan.md`;
-- `docs/design-handoff.md`;
-- `docs/coding-handoff.md`;
-- `docs/validation-report.md`;
-- `docs/final-handoff.md`.
-
-Busca tres tipos de problemas:
+Busca:
 
 **Contexto perdido**
 - ¿el siguiente agente recibió suficiente información?
 
 **Responsabilidad incorrecta**
-- ¿algún agente tomó decisiones que correspondían a otro?
+- ¿algún agente hizo algo que correspondía a otro?
 
 **Evidencia insuficiente**
-- ¿algún agente afirmó que algo funciona sin demostrarlo?
+- ¿alguien afirmó que algo funciona sin demostrarlo?
+
+**Ambigüedad**
+- ¿algún handoff obligó al siguiente agente a adivinar?
 
 ### 2. Pide una revisión al Orchestrator
 
@@ -30,42 +32,47 @@ Usa:
 
 > Revisa todo el flujo de agentes como un engineering lead. Busca handoffs incompletos, decisiones sin evidencia, responsabilidades solapadas, instrucciones ambiguas y validaciones faltantes. No cambies código. Propón mejoras concretas.
 
-Guarda las observaciones en `docs/orchestration-review.md`.
+Crea docs/orchestration-review.md con:
 
-### 3. Compara proceso y resultado
+    # Orchestration Review
 
-Responde en el documento:
+    ## 1. Handoff que funcionó bien
+    - Qué ocurrió:
+    - Por qué funcionó:
 
-- ¿el dashboard final habría podido producirse sin Orchestrator?
-- ¿qué valor aportó realmente la especialización?
-- ¿qué agente estuvo mejor definido?
-- ¿qué agente necesita mejores instrucciones?
-- ¿qué parte del flujo fue innecesariamente compleja?
-- ¿dónde la intervención humana redujo riesgo?
+    ## 2. Handoff que podría mejorar
+    - Qué información faltó:
+    - Cómo lo mejoraría:
 
-### 4. Diseña una mejora
+    ## 3. Responsabilidades solapadas
+    - ...
 
-Propón una versión 2 del flujo.
+    ## 4. Evidencia insuficiente
+    - ...
 
-Por ejemplo:
+    ## 5. Decisión que debe permanecer bajo control humano
+    - ...
 
-```text
-Requerimiento
-   ↓
-Planner
-   ↓
-Human approval
-   ↓
-Designer ──→ Coder
-              ↓
-           Validator
-              ↓
-        Orchestrator
-              ↓
-         Human review
-```
+    ## 6. Mejora propuesta para el Orchestrator
+    - ...
 
-Explica qué cambiarías y por qué.
+### 3. Diseña una versión 2
+
+Propón un flujo mejorado.
+
+Explica:
+- qué cambiarías;
+- por qué;
+- qué problema del flujo actual resuelve;
+- qué nuevo handoff necesitarías.
+
+### 4. Criterios de salida
+
+- [ ] Revisaste todos los handoffs.
+- [ ] Identificaste al menos un punto fuerte.
+- [ ] Identificaste al menos una mejora.
+- [ ] Identificaste una decisión humana.
+- [ ] Propusiste una versión 2.
 
 Haz commit y push.
 
