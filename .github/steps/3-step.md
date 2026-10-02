@@ -1,7 +1,28 @@
 ## Step 3: Orquesta diseño, desarrollo y validación
 
-### Objetivo
-Ejecutar un flujo real de agentes con handoffs y una segunda ronda de validación.
+### Teoría: del agente aislado al sistema de agentes
+
+La diferencia entre usar varios agentes y **orquestarlos** es el flujo de información.
+
+En este ejercicio:
+
+```
+Planner
+   ↓
+Designer
+   ↓
+Coder
+   ↓
+Validator
+   ↓
+Orchestrator
+   ↓
+Coder / Designer
+   ↓
+Validator
+```
+
+La segunda validación es importante porque introduce un patrón real de ingeniería: **feedback → corrección → nueva evidencia**.
 
 ### Fase A — Designer
 
@@ -108,6 +129,8 @@ Estructura:
 ```
 
 ### Fase C — Validator
+
+**Teoría:** un Validator no debería limitarse a decir "está bien". Debe producir evidencia que permita decidir si el trabajo cumple.
 
 Copia y pega:
 
