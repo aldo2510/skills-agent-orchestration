@@ -1,35 +1,63 @@
-## Step 4: Implementa el diseño
+# Step 4 — Audita la orquestación
 
-### Teoría
-El Coder no debería reinterpretar el producto desde cero. Un buen handoff reduce ambigüedad y permite que implementación y diseño evolucionen de forma controlada.
+## Objetivo
+Detectar handoffs débiles, responsabilidades duplicadas y evidencia insuficiente.
 
-### Copia y pega
-```text
-Usa docs/project-plan.md y docs/design-handoff.md.
-Delega al Coder la implementación de Project Pulse.
-Debe modificar app/index.html, app/styles.css y app/project-data.json.
-Conserva separación entre estructura, estilos y datos.
-Al terminar, documenta cambios, decisiones y evidencia en docs/coding-handoff.md.
-```
+## 1. Prompt exacto
+~~~text
+Audita:
+- docs/agent-map.md
+- docs/project-plan.md
+- docs/design-handoff.md
+- docs/coding-handoff.md
+- docs/validation-report.md
 
-Plantilla:
+No modifiques archivos.
 
-```markdown
-# Coding Handoff
-## Contexto recibido
-...
-## Cambios
-| Archivo | Cambio | Motivo |
-|---|---|---|
-| ... | ... | ... |
-## Decisiones
-...
-## Evidencia
-...
-## Incertidumbres
-...
-```
+Indica:
+1. un handoff claro;
+2. un handoff mejorable;
+3. responsabilidades que se solapan;
+4. evidencia insuficiente;
+5. una decisión que debe permanecer humana;
+6. una mejora para una versión 2.
+~~~
 
-Abre el HTML en el navegador.
+## 2. Crea docs/orchestration-review.md
+~~~markdown
+# Orchestration Review
 
-**Tiempo: 10-12 min.**
+## Handoff claro
+Planner → Designer porque existe una entrada y una salida explícitas.
+
+## Handoff mejorable
+Validator → Orchestrator debe transportar evidencia por criterio.
+
+## Solapamientos
+Orchestrator coordina; no debe reemplazar a los especialistas.
+
+## Evidencia insuficiente
+El comportamiento responsive requiere revisión visual, no solo lectura de HTML.
+
+## Control humano
+La aceptación del resultado corresponde al participante.
+
+## Versión 2
+Objetivo → Planner → Designer → Coder → Validator → corrección → Validator → humano.
+~~~
+
+## 3. Verificación
+~~~bash
+test -f docs/orchestration-review.md
+grep -Eiq 'handoff|humano|Orchestrator' docs/orchestration-review.md
+grep -Eiq 'mejora|versión 2|v2' docs/orchestration-review.md
+~~~
+
+## 4. Commit
+~~~bash
+git add docs/orchestration-review.md
+git commit -m "docs: audit orchestration"
+git push
+~~~
+
+**Tiempo sugerido: 10–12 min.**
