@@ -1,61 +1,42 @@
 # Step 1 — Conoce el equipo de agentes
 
 ## Objetivo
-Identifica las responsabilidades reales antes de delegar trabajo.
+Entender qué responsabilidad tiene cada agente y qué información debe pasar entre ellos.
 
-## 1. Inspecciona los agentes
-~~~bash
-find .github/agents -maxdepth 1 -type f -print
-for f in .github/agents/*.agent.md; do echo "===== $f ====="; cat "$f"; done
-~~~
-
-## 2. Prompt exacto para Copilot
+## Prompt exacto
 ~~~text
-Analiza todos los agentes de .github/agents.
-
+Actúa como Orchestrator.
+Analiza los agentes disponibles en .github/agents.
 No modifiques archivos.
-
-Para cada agente explica:
-- responsabilidad;
-- entrada;
-- salida;
-- límites;
-- siguiente agente recomendado.
-
-Explica cómo Orchestrator debe conservar contexto y exigir evidencia.
+Para cada agente indica responsabilidad, entrada, salida, qué no debe hacer y siguiente handoff.
 ~~~
 
-## 3. Crea docs/agent-map.md
+## 1. Crea docs/agent-map.md
 ~~~markdown
 # Agent Map
 
-| Agente | Responsabilidad | Entrada | Salida |
-|---|---|---|---|
-| Orchestrator | Coordinar agentes y contexto | Objetivo y resultados | Handoffs y decisiones |
-| Planner | Planificar | Requerimiento | Plan |
-| Designer | Diseñar UI | Plan | Diseño |
-| Coder | Implementar | Diseño y plan | Código |
-| Validator | Validar | Código y criterios | Evidencia y hallazgos |
+| Agente | Responsabilidad | Entrada | Salida | No debe hacer |
+|---|---|---|---|---|
+| Orchestrator | Coordinar el flujo y conservar contexto | Objetivo y resultados | Delegaciones y decisiones | Sustituir a especialistas |
+| Planner | Convertir objetivo en plan | Requerimiento | Plan ejecutable | Implementar código |
+| Designer | Diseñar experiencia visual | Plan | Diseño/handoff | Implementar |
+| Coder | Implementar | Plan + diseño | Archivos ejecutables | Cambiar requisitos |
+| Validator | Comprobar resultado | Código + criterios | Evidencia y hallazgos | Ocultar fallos |
 
-## Reglas
-1. Cada agente tiene un límite claro.
-2. Orchestrator coordina y no reemplaza especialistas.
-3. Cada handoff contiene contexto, tarea, restricciones y evidencia.
-4. Ningún resultado se acepta sin validación.
+## Regla de handoff
+Cada handoff debe contener contexto, objetivo, restricciones, resultado, evidencia y siguiente acción.
 ~~~
 
-## 4. Verificación
+## 2. Verificación
 ~~~bash
 test -f docs/agent-map.md
 grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/agent-map.md
 grep -Eiq 'handoff|entrada|salida' docs/agent-map.md
 ~~~
 
-## 5. Commit
+## 3. Commit
 ~~~bash
 git add docs/agent-map.md
 git commit -m "docs: map agent responsibilities"
 git push
-~~~
-
-**Tiempo sugerido: 12–14 min.**
+~~
