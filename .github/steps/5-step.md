@@ -1,26 +1,17 @@
-# Step 5 — Revisión humana inicial
+# Step 5 — Realiza la primera revisión humana
 
 ## Objetivo
-Separar validación automática de aceptación humana.
+Separar la validación de los agentes de la aceptación final de la persona.
 
-## 1. Prompt exacto
+## Prompt exacto
 ~~~text
 Revisa el estado completo de Project Pulse y sus handoffs.
-
 No modifiques archivos.
-
-Resume:
-- objetivo;
-- responsabilidades de cada agente;
-- hallazgos;
-- evidencia;
-- riesgos;
-- decisiones que requieren intervención humana.
-
+Resume objetivo, responsabilidades, hallazgos, evidencia, riesgos y decisiones que requieren intervención humana.
 No escribas código.
 ~~~
 
-## 2. Crea x-review.md
+## 1. Crea x-review.md
 ~~~markdown
 # Human Review
 
@@ -43,21 +34,21 @@ No escribas código.
 - docs/orchestration-review.md
 
 ## Decisión humana
-La persona participante decide si el resultado cumple el objetivo y si los hallazgos fueron resueltos correctamente.
+**Resultado:** Acepto / Acepto con observaciones / Requiere corrección
+
+**Motivo:** Escribe aquí la razón basada en la evidencia.
 ~~~
 
-## 3. Verificación
+## 2. Verificación
 ~~~bash
 test -f x-review.md
 test -f docs/validation-report.md
 grep -Eiq 'hallazgos|criterio' docs/validation-report.md
 ~~~
 
-## 4. Commit
+## 3. Commit
 ~~~bash
 git add x-review.md
 git commit -m "docs: record human review"
 git push
-~~~
-
-**Tiempo sugerido: 10–12 min.**
+~~
