@@ -1,5 +1,28 @@
 ## Step 5: Handoff final y revisión humana
 
+### Teoría: human-in-the-loop
+
+En una arquitectura de agentes, automatizar una tarea no significa automatizar completamente la decisión.
+
+El patrón que practicarás es:
+
+```
+Humano define objetivo
+        ↓
+Orchestrator coordina
+        ↓
+Agentes ejecutan
+        ↓
+Validator genera evidencia
+        ↓
+Humano acepta, corrige o rechaza
+```
+
+La revisión final debe comprobar dos cosas:
+
+1. **Producto:** el dashboard funciona y cumple el requerimiento.
+2. **Proceso:** los agentes recibieron contexto correcto y dejaron evidencia suficiente.
+
 ### 1. Genera el handoff final
 
 Copia y pega:
