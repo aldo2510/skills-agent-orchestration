@@ -2,147 +2,230 @@
 
 Esta es la parte principal del laboratorio.
 
-> **Idea clave:** la orquestación se vuelve útil cuando existe un flujo de trabajo con dependencias y feedback. No se trata de lanzar cinco agentes y esperar que todo funcione.
-
----
+> **Idea clave:** la orquestación se vuelve útil cuando existe un flujo con dependencias, handoffs, validación y feedback. No se trata de lanzar cinco agentes y esperar que todo funcione.
 
 ### Fase A — Diseño
 
-Pide al Orchestrator que delegue al Designer.
-
-Puedes usar:
+Pide al Orchestrator:
 
 > Usa docs/project-plan.md como contexto. Delega al Designer la definición de la experiencia del dashboard. El Designer debe entregar un handoff accionable para el Coder y no debe implementar código.
 
 El Designer debe definir:
-
 - layout;
 - jerarquía visual;
-- tarjetas de proyecto;
+- tarjetas;
 - estados;
 - progreso;
 - responsive behavior;
-- criterios básicos de accesibilidad;
-- relación entre estructura, estilos y datos.
+- accesibilidad básica;
+- relación entre HTML, CSS y datos.
 
-Guarda el handoff en `docs/design-handoff.md`.
+Crea docs/design-handoff.md.
 
-**Antes de continuar**, revisa si el Coder podría implementar el dashboard únicamente leyendo ese documento.
+Usa:
 
-Si no puede, mejora el handoff.
+    # Design Handoff
+
+    ## Contexto recibido
+    - Requerimiento:
+    - Criterios de aceptación relevantes:
+
+    ## Propuesta visual
+    ### Layout
+    ...
+    ### Componentes
+    ...
+    ### Estados
+    ...
+    ### Progreso
+    ...
+
+    ## Responsive behavior
+    - Desktop:
+    - Tablet:
+    - Mobile:
+
+    ## Accesibilidad
+    - ...
+
+    ## Reglas para el Coder
+    - ...
+    - ...
+
+    ## Decisiones y trade-offs
+    - ...
+
+    ## Preguntas abiertas
+    - ...
+
+Antes de continuar, pregúntate: ¿un Coder podría implementar el dashboard leyendo solamente este handoff y el plan?
 
 ### Fase B — Implementación
 
 Pide al Orchestrator:
 
-> Delega al Coder la implementación usando docs/project-plan.md y docs/design-handoff.md como contexto. El Coder debe mantener separados HTML, CSS y JSON. Al terminar, entrega un resumen de cambios y evidencia de validación básica.
+> Delega al Coder la implementación usando docs/project-plan.md y docs/design-handoff.md como contexto. Mantén separados HTML, CSS y JSON. Al terminar, entrega evidencia de lo realizado.
 
 El Coder debe implementar:
+- app/index.html;
+- app/styles.css;
+- app/project-data.json.
 
-- `app/index.html`;
-- `app/styles.css`;
-- `app/project-data.json`.
+Crea o actualiza docs/coding-handoff.md:
 
-Debe conservar la separación entre estructura, estilos y datos.
+    # Coding Handoff
 
-Guarda en `docs/coding-handoff.md`:
+    ## Contexto recibido
+    - Plan:
+    - Design handoff:
 
-- entrada recibida;
-- cambios realizados;
-- archivos afectados;
-- decisiones tomadas;
-- evidencia;
-- preguntas o incertidumbres.
+    ## Cambios realizados
+    | Archivo | Cambio | Motivo |
+    |---|---|---|
+    | ... | ... | ... |
+
+    ## Decisiones tomadas
+    - ...
+
+    ## Evidencia
+    - Cómo comprobé que funciona:
+    - Qué revisé manualmente:
+
+    ## Incertidumbres
+    - ...
 
 ### Fase C — Validación
 
-Ahora delega al Validator.
+Delega al Validator:
 
-> Revisa la implementación completa usando el requerimiento original y los handoffs como referencia. No corrijas el código. Reporta únicamente hallazgos, evidencia, severidad y recomendación.
+> Revisa la implementación completa usando el requerimiento original, el plan y los handoffs. No corrijas el código. Reporta hallazgos, evidencia, severidad y recomendación.
 
-El Validator debe comprobar:
-
-- referencias HTML → CSS → JSON;
+Debe comprobar:
+- HTML → CSS → JSON;
 - estructura HTML;
 - datos válidos;
 - estados visibles;
 - progreso;
 - responsive behavior;
-- ausencia de dependencias de backend;
-- problemas obvios de accesibilidad;
+- ausencia de backend;
+- accesibilidad básica;
 - coherencia con el diseño.
 
-Guarda `docs/validation-report.md`.
+Crea docs/validation-report.md:
 
-### Fase D — No aceptes el primer resultado
+    # Validation Report
 
-Esta fase es deliberadamente iterativa.
+    ## Resumen
+    - Estado:
+    - Fecha:
+    - Alcance:
+
+    ## Checks
+    | Check | Resultado | Evidencia |
+    |---|---|---|
+    | Referencia CSS | PASS/FAIL | ... |
+    | Referencia JSON | PASS/FAIL | ... |
+    | Datos | PASS/FAIL | ... |
+    | Estados | PASS/FAIL | ... |
+    | Progreso | PASS/FAIL | ... |
+    | Responsive | PASS/FAIL | ... |
+    | Accesibilidad | PASS/FAIL | ... |
+    | Sin backend | PASS/FAIL | ... |
+
+    ## Hallazgos
+    | Hallazgo | Severidad | Evidencia | Recomendación |
+    |---|---|---|---|
+    | ... | ... | ... | ... |
+
+    ## Revalidación
+    - Qué debería comprobarse después de una corrección:
+
+### Fase D — Iteración
+
+No aceptes automáticamente el primer resultado.
 
 Pide al Orchestrator:
 
 > Procesa el reporte de Validator. Clasifica los hallazgos, decide qué agente debe intervenir y genera un handoff específico para corregir cada problema. No corrijas directamente si el trabajo corresponde a otro agente.
 
-Después delega la corrección al agente correspondiente.
+Actualiza docs/coding-handoff.md:
 
-Actualiza `docs/coding-handoff.md` con:
+    ## Iteración de corrección
+    | Hallazgo | Agente | Cambio | Evidencia |
+    |---|---|---|---|
+    | ... | ... | ... | ... |
 
-- hallazgo;
-- agente responsable;
-- cambio realizado;
-- razón;
-- evidencia antes/después.
+Después vuelve a validar.
 
-Vuelve a ejecutar la validación.
+### Fase E — Segunda validación
 
-### Fase E — Introduce una segunda ronda
-
-Pide al Validator una segunda revisión:
+Pide al Validator:
 
 > Revisa nuevamente el dashboard después de las correcciones. Compara el resultado con el requerimiento original y con el primer validation-report. Indica qué hallazgos fueron resueltos y cuáles permanecen.
 
-Esto obliga al equipo a demostrar que el feedback realmente produjo una mejora.
+Añade al validation-report una sección:
+
+    ## Segunda ronda
+    - Hallazgos resueltos:
+    - Hallazgos pendientes:
+    - Evidencia:
 
 ### Fase F — Handoff final
 
-Pide al Orchestrator que produzca `docs/final-handoff.md`.
+Pide al Orchestrator que produzca docs/final-handoff.md.
 
-Debe incluir:
+Usa:
 
-- responsabilidades de cada agente;
-- decisiones relevantes;
-- secuencia de trabajo;
-- validaciones ejecutadas;
-- iteraciones realizadas;
-- riesgos;
-- pendientes;
-- decisiones bajo control humano.
+    # Final Handoff
+
+    ## Objetivo y resultado
+    ...
+
+    ## Flujo de agentes
+    ...
+
+    ## Responsabilidades
+    | Agente | Trabajo realizado | Evidencia |
+    |---|---|---|
+    | ... | ... | ... |
+
+    ## Decisiones relevantes
+    - ...
+
+    ## Validaciones ejecutadas
+    - ...
+
+    ## Iteraciones
+    - ...
+
+    ## Riesgos y pendientes
+    - ...
+
+    ## Decisiones bajo control humano
+    - ...
 
 ### Fase G — Revisión humana
 
-Abre el HTML en el navegador.
-
-Revisa manualmente:
-
-1. el dashboard;
-2. los datos;
-3. los handoffs;
-4. el reporte de validación;
-5. la segunda ronda de validación;
-6. la coherencia con el requerimiento original.
+Abre el HTML en el navegador y revisa:
+1. dashboard;
+2. datos;
+3. handoffs;
+4. validación inicial;
+5. segunda validación;
+6. requerimiento original.
 
 Corrige cualquier problema que los agentes no hayan detectado.
 
 Haz commit y push.
 
-### Preguntas para discusión
+### Criterios de salida
 
-Antes de terminar esta fase, responde:
+- [ ] Existe design-handoff.md.
+- [ ] Existe coding-handoff.md.
+- [ ] Existe validation-report.md.
+- [ ] Existe final-handoff.md.
+- [ ] La implementación funciona.
+- [ ] Existe evidencia de una segunda validación.
+- [ ] Revisaste manualmente el resultado.
 
-1. ¿Qué agente aportó más valor?
-2. ¿Qué información tuvo que pasar entre agentes?
-3. ¿Qué información se perdió o quedó ambigua?
-4. ¿Qué ocurrió cuando el Validator devolvió feedback?
-5. ¿Qué tarea no debería hacer nunca el Orchestrator?
-6. ¿Qué decisión necesitó intervención humana?
-
-**Tiempo sugerido: 45-55 min.**
+**Tiempo sugerido: 40-45 min.**
