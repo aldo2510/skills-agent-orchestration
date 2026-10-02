@@ -1,10 +1,17 @@
 name: Step 3
 
 on:
+  push:
+    paths:
+      - "docs/design-handoff.md"
+      - "docs/coding-handoff.md"
+      - "docs/validation-report.md"
+      - "docs/final-handoff.md"
+      - "app/**"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: write
   issues: write
 
@@ -13,6 +20,7 @@ env:
 
 jobs:
   find_exercise:
+    if: ${{ !github.event.repository.is_template }}
     uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.9.1
 
   check:
@@ -20,8 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Validate orchestration evidence
-        run: |
+      - run: |
           test -f docs/design-handoff.md
           test -f docs/coding-handoff.md
           test -f docs/validation-report.md
@@ -29,7 +36,7 @@ jobs:
           test -f app/index.html
           test -f app/styles.css
           test -f app/project-data.json
-          grep -Eiq 'Segunda ronda|Second round|hallazgos' docs/validation-report.md
+          grep -Eiq 'Segunda ronda|segunda validaci|hallazgos resueltos' docs/validation-report.md
           grep -Eiq 'Orchestrator|Planner|Designer|Coder|Validator' docs/final-handoff.md
 
   next:
@@ -63,7 +70,7 @@ jobs:
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
       - run: |
-          gh workflow disable "${{github.workflow}}"
+          gh workflow disable "${{ github.workflow }}"
           gh workflow enable "Step 4"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
