@@ -6,7 +6,12 @@
 
 Abre un Codespace y ejecuta Copilot CLI.
 
-Inspecciona primero el repositorio y después los archivos bajo `.github/agents/`.
+Inspecciona:
+- .github/agents/orchestrator.agent.md
+- .github/agents/planner.agent.md
+- .github/agents/designer.agent.md
+- .github/agents/coder.agent.md
+- .github/agents/validator.agent.md
 
 No pidas todavía que implementen el dashboard.
 
@@ -22,12 +27,12 @@ Identifica:
 | Coder | Implementa |
 | Validator | Busca problemas y entrega evidencia |
 
-Lee cada archivo `.agent.md` y responde:
-
-- ¿qué puede hacer el agente?
+Para cada agente responde:
+- ¿qué puede hacer?
 - ¿qué no debería hacer?
-- ¿qué información necesita para trabajar?
-- ¿qué debería entregar al siguiente agente?
+- ¿qué información necesita?
+- ¿qué debe entregar?
+- ¿quién consume su salida?
 
 ### 3. Experimenta con el contexto
 
@@ -35,55 +40,59 @@ Pide al Orchestrator:
 
 > Explica qué información necesitarías recibir antes de delegar una tarea al Planner. No modifiques ningún archivo.
 
-Después pregunta:
+Después:
 
 > ¿Qué podría salir mal si el Coder recibe únicamente "construye el dashboard" sin recibir el requerimiento, restricciones ni criterios de aceptación?
 
-Compara la respuesta con tus propios criterios.
+Compara las respuestas con tus propios criterios.
 
-### 4. Diseña el mapa de handoffs
+### 4. Crea docs/agent-map.md
 
-Crea `docs/agent-map.md`.
+**El archivo no existe inicialmente. Debes crearlo.**
 
-Incluye:
+Usa esta plantilla:
 
-- responsabilidad de cada agente;
-- entradas esperadas;
-- salida esperada;
-- agente que consume esa salida;
-- información que debe viajar en cada handoff;
-- un ejemplo de información que **no** debería delegarse automáticamente;
-- qué decisiones permanecen bajo control humano.
+    # Agent Map
 
-Puedes representar el flujo así:
+    ## 1. Objetivo del equipo
+    Explica qué problema resuelve el conjunto de agentes.
 
-```text
-Human
-  ↓
-Orchestrator
-  ↓
-Planner
-  ↓
-Designer → Coder → Validator
-                  ↓
-              feedback
-                  ↓
-                Coder
-                  ↓
-                Human
-```
+    ## 2. Agentes
+    | Agente | Responsabilidad | Entrada | Salida | Consumidor |
+    |---|---|---|---|---|
+    | Orchestrator | ... | ... | ... | ... |
+    | Planner | ... | ... | ... | ... |
+    | Designer | ... | ... | ... | ... |
+    | Coder | ... | ... | ... | ... |
+    | Validator | ... | ... | ... | ... |
 
-### 5. Mini ejercicio de arquitectura
+    ## 3. Flujo de handoffs
+    Describe paso a paso cómo debería viajar la información.
 
-Imagina que el Validator encuentra un problema de accesibilidad.
+    ## 4. Información que no debería perderse
+    - ...
+    - ...
+    - ...
 
-Escribe quién debería:
-1. interpretar el hallazgo;
-2. decidir si debe corregirse;
-3. implementar la corrección;
-4. comprobar nuevamente el resultado.
+    ## 5. Decisiones bajo control humano
+    - ...
+    - ...
 
-Explica por qué.
+    ## 6. Escenario de accesibilidad
+    Si Validator encuentra un problema de accesibilidad:
+    - ¿quién interpreta el hallazgo?
+    - ¿quién decide si se corrige?
+    - ¿quién implementa?
+    - ¿quién vuelve a validar?
+    - ¿por qué?
+
+### 5. Criterios de salida
+
+- [ ] Identificaste los 5 agentes.
+- [ ] Documentaste entrada y salida de cada uno.
+- [ ] Definiste los handoffs.
+- [ ] Identificaste decisiones humanas.
+- [ ] Respondiste el escenario de accesibilidad.
 
 Haz commit y push.
 
