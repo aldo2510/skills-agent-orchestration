@@ -3,28 +3,17 @@
 ## Objetivo
 Una corrección sin nueva evidencia es una hipótesis. Validator debe comprobar nuevamente el resultado.
 
-## 1. Prompt exacto
+## Prompt exacto
 ~~~text
 Actúa como Validator.
-
 Revisa nuevamente el dashboard después de las correcciones.
-
 No modifiques archivos.
-
 Compara cada hallazgo de la primera validación con el estado actual.
-Para cada uno indica:
-- hallazgo original;
-- evidencia actual;
-- resultado;
-- si quedó resuelto;
-- si requiere otra iteración.
-
-Incluye también JSON, HTML, CSS, responsive y accesibilidad.
+Para cada uno indica hallazgo original, evidencia actual, resultado, si quedó resuelto y si requiere otra iteración.
+Incluye JSON, HTML, CSS, responsive y accesibilidad.
 ~~~
 
-## 2. Actualiza docs/validation-report.md
-Agrega esta sección:
-
+## 1. Agrega a docs/validation-report.md
 ~~~markdown
 ## Segunda ronda
 
@@ -35,21 +24,20 @@ Agrega esta sección:
 | Problema visual | Revisión responsive | Resuelto |
 
 ## Segunda validación
-
 La segunda validación confirma si las correcciones resolvieron los hallazgos. Si alguno continúa abierto, debe regresar al Orchestrator.
 ~~~
 
-## 3. Ejecuta verificaciones
+Si un hallazgo no existió, sustitúyelo por el hallazgo real.
+
+## 2. Ejecuta
 ~~~bash
 python -m json.tool app/project-data.json
 grep -E 'styles.css|project-data.json' app/index.html
 ~~~
 
-## 4. Commit
+## 3. Commit
 ~~~bash
 git add docs/validation-report.md app
 git commit -m "docs: record second validation"
 git push
-~~~
-
-**Tiempo sugerido: 7–9 min.**
+~~
