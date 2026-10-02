@@ -1,10 +1,13 @@
 name: Step 4
 
 on:
+  push:
+    paths:
+      - "docs/orchestration-review.md"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: write
   issues: write
 
@@ -13,6 +16,7 @@ env:
 
 jobs:
   find_exercise:
+    if: ${{ !github.event.repository.is_template }}
     uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.9.1
 
   check:
@@ -20,8 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - run: test -f docs/orchestration-review.md
-      - run: grep -Eiq 'handoff|humano|Orchestrator' docs/orchestration-review.md
+      - run: |
+          test -f docs/orchestration-review.md
+          grep -Eiq 'handoff|humano|Orchestrator' docs/orchestration-review.md
+          grep -Eiq 'mejora|versi.n 2|v2' docs/orchestration-review.md
 
   next:
     needs: [find_exercise, check]
@@ -54,7 +60,7 @@ jobs:
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
       - run: |
-          gh workflow disable "${{github.workflow}}"
+          gh workflow disable "${{ github.workflow }}"
           gh workflow enable "Step 5"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
